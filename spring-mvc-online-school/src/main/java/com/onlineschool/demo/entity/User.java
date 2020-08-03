@@ -1,13 +1,20 @@
 package com.onlineschool.demo.entity;
 
 import java.time.LocalDate;
+import java.util.Collection;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name="user")
@@ -35,6 +42,17 @@ public class User {
 	
     @Column(name="created_at")
     private LocalDate createdAt;
+    
+    @ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinTable(name="users_roles",
+    joinColumns=@JoinColumn(name="user_id"),
+    inverseJoinColumns=@JoinColumn(name="role_id"))
+    private Collection<Role> roles;
+    
+    @PrePersist
+    public void setCreateAt() {
+    	this.createdAt = LocalDate.now();
+    }
 
     // - - - constructors - - -
 	public User() {
@@ -47,6 +65,17 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.isTeacher = isTeacher;
+	}
+	
+	public User(String firstName, String lastName, String email, String password, boolean isTeacher,
+			Collection<Role> roles) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.password = password;
+		this.isTeacher = isTeacher;
+		this.roles = roles;
 	}
 
 	// - - - getters and setters - - -
@@ -106,11 +135,19 @@ public class User {
 		this.createdAt = createdAt;
 	}
 
+	public Collection<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Collection<Role> roles) {
+		this.roles = roles;
+	}
+
+	
 	// - - - toString() - - -
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", isTeacher=" + isTeacher + ", createdAt=" + createdAt + "]";
+				+ ", isTeacher=" + isTeacher + ", createdAt=" + createdAt + ", roles=" + roles + "]";
 	}
-    
 }
