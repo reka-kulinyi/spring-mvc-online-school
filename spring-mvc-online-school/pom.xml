@@ -101,7 +101,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 
 
 	<build>
-		<finalName>anotherschoolapp</finalName>
+		<finalName>online-school</finalName>
 	
 		<plugins>
 			<plugin>
