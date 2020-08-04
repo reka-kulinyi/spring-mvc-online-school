@@ -23,6 +23,7 @@ public class DemoController {
 	
 	@GetMapping("/")
 	public String home(Model model) {
+		
 		List<User> instructors = userService.getAllInstructors();
 		for(User instructor : instructors) {
 			List<Course> courses = courseService.getCoursesByInstructor(instructor);

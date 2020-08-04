@@ -1,6 +1,6 @@
 package com.onlineschool.demo.entity;
 
-import java.math.BigInteger;
+import java.math.BigDecimal;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -22,7 +22,7 @@ public class Course {
 	private Long id;
 	
 	@Column(name="price")
-	private BigInteger price;
+	private BigDecimal price;
 	
 	@ManyToOne(cascade= {CascadeType.DETACH, CascadeType.MERGE, 
 			CascadeType.PERSIST, CascadeType.REFRESH})
@@ -34,14 +34,17 @@ public class Course {
 	@JoinColumn(name="subject_id")
 	private Subject subject;
 
+	
+	// - - - constructors - - -
 	public Course() {
 	}
 
-	public Course(BigInteger price) {
+	public Course(BigDecimal price) {
 		super();
 		this.price = price;
 	}
 
+	// - - - getters and setters - - -
 	public Long getId() {
 		return id;
 	}
@@ -50,11 +53,11 @@ public class Course {
 		this.id = id;
 	}
 
-	public BigInteger getPrice() {
+	public BigDecimal getPrice() {
 		return price;
 	}
 
-	public void setPrice(BigInteger price) {
+	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
 
@@ -74,11 +77,12 @@ public class Course {
 		this.subject = subject;
 	}
 
+	// - - - toString() - - -
 	@Override
 	public String toString() {
 		return "Course [id=" + id + ", price=" + price + ", "
 				+ "instructor=" + instructor.getFirstName() + instructor.getLastName() + ", "
-						+ "subject=" + subject.getName() + "]";
+				+ "subject=" + subject.getName() + "]";
 	}
 	
 	
