@@ -1,7 +1,9 @@
 package com.onlineschool.demo.entity;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -12,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.JoinColumn;
@@ -49,10 +52,9 @@ public class User {
     inverseJoinColumns=@JoinColumn(name="role_id"))
     private Collection<Role> roles;
     
-    @PrePersist
-    public void setCreateAt() {
-    	this.createdAt = LocalDate.now();
-    }
+    @OneToMany(mappedBy="instructor",
+    cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    private List<Course> courses;
 
     // - - - constructors - - -
 	public User() {
@@ -76,6 +78,32 @@ public class User {
 		this.password = password;
 		this.isTeacher = isTeacher;
 		this.roles = roles;
+	}
+	
+	public User(String firstName, String lastName, String email, boolean isTeacher, LocalDate createdAt,
+			Collection<Role> roles, List<Course> courses) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.isTeacher = isTeacher;
+		this.createdAt = createdAt;
+		this.roles = roles;
+		this.courses = courses;
+	}
+
+	// - - - helper methods
+	@PrePersist
+    public void setCreateAt() {
+    	this.createdAt = LocalDate.now();
+    }
+	
+	public void addCourse(Course course) {
+		if(courses == null) {
+			courses = new ArrayList<>();
+		}
+		course.setInstructor(this);
+		courses.add(course);
 	}
 
 	// - - - getters and setters - - -
@@ -142,12 +170,21 @@ public class User {
 	public void setRoles(Collection<Role> roles) {
 		this.roles = roles;
 	}
-
 	
-	// - - - toString() - - -
+	public List<Course> getCourses() {
+		return courses;
+	}
+
+	public void setCourses(List<Course> courses) {
+		this.courses = courses;
+	}
+
+	// // - - - toString() - - -
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", isTeacher=" + isTeacher + ", createdAt=" + createdAt + ", roles=" + roles + "]";
+				+ ", isTeacher=" + isTeacher + ", createdAt=" + createdAt + ", roles=" + roles + ", courses=" + courses
+				+ "]";
 	}
+
 }
