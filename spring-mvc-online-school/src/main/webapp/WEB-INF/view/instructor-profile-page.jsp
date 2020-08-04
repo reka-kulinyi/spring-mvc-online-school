@@ -12,6 +12,16 @@
 	<body>
 		<h2>${instructor.firstName} ${instructor.lastName}</h2>
 		<p>${instructor.email}</p>
+		<p>Introduction</p>
+		<c:choose>
+			<c:when test="${instructor.introduction != null}">
+				<p>${instructor.introduction}</p>
+			</c:when>
+			<c:otherwise>
+				No introduction
+			</c:otherwise>
+		</c:choose>		
+		<br/>
 		<p>Courses : </p>
 		<c:choose>
 			<c:when test="${fn:length(instructor.courses) gt 0}">

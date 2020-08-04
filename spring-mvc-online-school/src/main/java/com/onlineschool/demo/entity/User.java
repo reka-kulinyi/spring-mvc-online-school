@@ -46,6 +46,9 @@ public class User {
     @Column(name="created_at")
     private LocalDate createdAt;
     
+    @Column(name="introduction")
+    private String introduction;
+    
     @ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinTable(name="users_roles",
     joinColumns=@JoinColumn(name="user_id"),
@@ -60,34 +63,35 @@ public class User {
 	public User() {
 	}
 
-	public User(String firstName, String lastName, String email, String password, boolean isTeacher) {
-		super();
+	public User(String firstName, String lastName, String email, String password, 
+			boolean isTeacher, String introduction) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.isTeacher = isTeacher;
+		this.introduction = introduction;
 	}
 	
-	public User(String firstName, String lastName, String email, String password, boolean isTeacher,
-			Collection<Role> roles) {
-		super();
+	public User(String firstName, String lastName, String email, String password, 
+			boolean isTeacher, String introduction, Collection<Role> roles) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.isTeacher = isTeacher;
+		this.introduction = introduction;
 		this.roles = roles;
 	}
 	
-	public User(String firstName, String lastName, String email, boolean isTeacher, LocalDate createdAt,
-			Collection<Role> roles, List<Course> courses) {
-		super();
+	public User(String firstName, String lastName, String email, boolean isTeacher, 
+			LocalDate createdAt, String introduction, Collection<Role> roles, List<Course> courses) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.isTeacher = isTeacher;
 		this.createdAt = createdAt;
+		this.introduction = introduction;
 		this.roles = roles;
 		this.courses = courses;
 	}
@@ -153,6 +157,14 @@ public class User {
 
 	public void setTeacher(boolean isTeacher) {
 		this.isTeacher = isTeacher;
+	}
+	
+	public String getIntroduction() {
+		return introduction;
+	}
+
+	public void setIntroduction(String introduction) {
+		this.introduction = introduction;
 	}
 
 	public LocalDate getCreatedAt() {
