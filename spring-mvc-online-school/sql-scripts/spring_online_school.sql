@@ -15,6 +15,7 @@ CREATE TABLE `user` (
 	`first_name` VARCHAR(50) NOT NULL,
 	`last_name` VARCHAR(50) NOT NULL,
 	`email` VARCHAR(50) NOT NULL UNIQUE,
+	`introduction` VARCHAR(600),
 	`created_at` DATETIME DEFAULT NOW(),
 	PRIMARY KEY(`id`) 
 ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
@@ -27,14 +28,14 @@ CREATE TABLE `user` (
 -- Default password for all the populated users is: fun123
 --
 
-INSERT INTO `user` (email, password, first_name, last_name, created_at)
+INSERT INTO `user` (email, password, first_name, last_name, created_at, introduction)
 VALUES 
-('john@hamstermail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','John','Taylor', '2019-05-25'),
-('rose@hamstermail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Rose','Smith', '2020-01-12'),
-('joe@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Joe','Wright', date_sub(NOW(), INTERVAL 1 DAY)),
-('mary@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Mary','Smith', '2018-11-26'),
-('james@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','James','Anderson', '2020-04-30'),
-('tom@adminmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Tom','Admin', '2018-10-24');
+('john@hamstermail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','John','Taylor', '2019-05-25', 'John Lorem ipsum...'),
+('rose@hamstermail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Rose','Smith', '2020-01-12', 'Rose Lorem ipsum...'),
+('joe@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Joe','Wright', date_sub(NOW(), INTERVAL 1 DAY), NULL),
+('mary@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Mary','Smith', '2018-11-26', NULL),
+('james@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','James','Anderson', '2020-04-30', NULL),
+('tom@adminmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Tom','Admin', '2018-10-24', NULL);
 
 
 --
