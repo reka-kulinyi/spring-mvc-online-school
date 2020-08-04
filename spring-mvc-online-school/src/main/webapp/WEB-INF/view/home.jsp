@@ -20,6 +20,7 @@
 					<th>Last name</th>
 					<th>Email</th>
 					<th>Created at</th>
+					<th>Courses</th>
 				</tr>
 				<c:forEach var="instructor" items="${instructors}">
 					
@@ -28,6 +29,18 @@
 						<td>${instructor.lastName}</td>
 						<td>${instructor.email}</td>
 						<td>${instructor.createdAt}</td>
+						<td>
+							<c:choose>
+								<c:when test="${fn:length(instructor.courses) gt 0}">
+									<c:forEach var="course" items="${instructor.courses}">
+										${course.subject.name} ${course.price} |
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+									No courses
+								</c:otherwise>
+							</c:choose>
+						</td>
 					</tr>
 				</c:forEach>
 			</table>
