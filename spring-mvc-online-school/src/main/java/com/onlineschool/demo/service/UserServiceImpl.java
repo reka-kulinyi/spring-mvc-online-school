@@ -20,6 +20,12 @@ public class UserServiceImpl implements UserService {
 	public List<User> getAllInstructors() {
 		return userDao.getAllInstructors();
 	}
+
+	@Override
+	@Transactional
+	public User getInstructorById(long id) {
+		return userDao.getInstructorById(id);
+	}
 	
 	
 }

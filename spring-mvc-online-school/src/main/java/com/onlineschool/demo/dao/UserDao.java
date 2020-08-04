@@ -6,4 +6,6 @@ import com.onlineschool.demo.entity.User;
 public interface UserDao {
 
 	List<User> getAllInstructors();
+
+	User getInstructorById(long id);
 }

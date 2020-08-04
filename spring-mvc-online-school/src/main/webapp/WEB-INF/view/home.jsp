@@ -16,18 +16,19 @@
 		<div id="content">
 			<table>
 				<tr>
-					<th>First name</th>
-					<th>Last name</th>
-					<th>Email</th>
+					<th>Instructor name</th>
 					<th>Created at</th>
 					<th>Courses</th>
 				</tr>
 				<c:forEach var="instructor" items="${instructors}">
-					
+					<!-- link for instructor profile -->
+					<c:url var="profileLink" value="/instructors">
+						<c:param name="instructorId" value="${instructor.id}"/>
+					</c:url>
 					<tr>
-						<td>${instructor.firstName}</td>
-						<td>${instructor.lastName}</td>
-						<td>${instructor.email}</td>
+						<td>
+							<a href="${profileLink}">${instructor.firstName} ${instructor.lastName}</a>
+						</td>
 						<td>${instructor.createdAt}</td>
 						<td>
 							<c:choose>
