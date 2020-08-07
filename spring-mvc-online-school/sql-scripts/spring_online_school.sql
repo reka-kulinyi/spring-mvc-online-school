@@ -31,11 +31,13 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (email, password, first_name, last_name, is_teacher, created_at, introduction)
 VALUES 
-('john@hamstermail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','John','Taylor', 1,'2019-05-25', 'John Lorem ipsum...'),
-('rose@hamstermail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Rose','Smith', 1,'2020-01-12', 'Rose Lorem ipsum...'),
-('joe@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Joe','Wright', 1,date_sub(NOW(), INTERVAL 1 DAY), NULL),
-('mary@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Mary','Smith', 0,'2018-11-26', NULL),
-('james@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','James','Anderson', 0,'2020-04-30', NULL),
+('john@hamstermail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','John','Taylor', 1, '2019-05-25', 'John lorem ipsum...'),
+('rose@hamstermail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Rose','Smith', 1, '2020-01-12', 'Rose lorem ipsum...'),
+('steven@parrotmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Steve','Wright', 1, '2019-08-04', 'Steven lorem ipsum...'),
+('jane@parrotmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Jane','White', 1, '2020-06-28', 'Jane lorem ipsum...'),
+('joe@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Joe','Wright', 1, date_sub(NOW(), INTERVAL 1 DAY), NULL),
+('mary@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Mary','Smith', 0, '2018-11-26', NULL),
+('james@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','James','Anderson', 0, '2020-04-30', NULL),
 ('tom@adminmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Tom','Admin', 0,'2018-10-24', NULL);
 
 
@@ -93,9 +95,11 @@ VALUES
 (1, 2),
 (2, 2),
 (3, 2),
-(4, 3),
-(5, 3),
-(6, 1);
+(4, 2),
+(5, 2),
+(6, 3),
+(7, 3),
+(8, 1);
 
 --
 -- Table structure for table 'subject'
@@ -152,7 +156,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 --
 INSERT INTO `course` (instructor_id, subject_id, price)
 VALUES
-(1, 1, 20.50), (1,2,15.30), (2,4,10.50), (2,7,8.25);
+(1, 1, 20.50), (1,2,15.30), (2,4,10.50), (2,7,8.25), (3,3,10.25), (3,1,12.50), (4,4,11.50),(4,7,10.00);
 
 
 --
@@ -188,8 +192,8 @@ SET FOREIGN_KEY_CHECKS = 1;
 --
 INSERT INTO `review` (student_id, course_id, review_text)
 VALUES
-(4, 1, 'Joe is an amazing teacher, now I have all As in Maths!'), 
-(5, 2, 'Joe is an excellent instructor, I have so much more confidence now and I managed to pass my English language exam with flying colors'), 
+(4, 1, 'John is an amazing teacher, now I have all As in Maths!'), 
+(5, 2, 'John is an excellent instructor, I have so much more confidence now and I managed to pass my English language exam with flying colors'), 
 (4, 3, 'Rose is an excellent German teacher, she helped me rewrite my CV in german');
 
 --
@@ -223,8 +227,10 @@ SET FOREIGN_KEY_CHECKS = 1;
 
 INSERT INTO `student_course` (student_id, course_id)
 VALUES 
-(4, 1),
-(4, 3),
-(5, 2),
-(5, 4);
+(6, 1),
+(6, 3),
+(6, 7),
+(7, 2),
+(7, 4),
+(7, 5);
 
