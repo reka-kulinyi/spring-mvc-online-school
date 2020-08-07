@@ -1,4 +1,5 @@
 package com.onlineschool.demo.dao;
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.onlineschool.demo.entity.User;
@@ -9,5 +10,5 @@ public interface UserDao {
 
 	User getInstructorById(long id);
 
-	List<User> getInstructorsBySubjectAndPrice(String searchSubject, double maxPrice);
+	List<User> getInstructorsBySubjectAndPrice(String searchSubject, BigDecimal maxPrice);
 }

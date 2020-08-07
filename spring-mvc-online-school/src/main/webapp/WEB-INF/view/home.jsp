@@ -24,7 +24,7 @@
 				<label for="setMaxPrice">Max price</label>
 				<input type="number" name="maxPrice" value="0" min="0" step="0.01"
 				placeholder="0.0" data-number-to-fixed="2" id="setMaxPrice"/>$
-				<input type="button" value="Search"/>
+				<input type="submit" value="Search"/>
 			</form:form>
 		</div>
 		<br/>

@@ -1,5 +1,6 @@
 package com.onlineschool.demo.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 
@@ -44,12 +45,12 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public List<User> getInstructorsBySubjectAndPrice(String searchSubject, double maxPrice) {
+	public List<User> getInstructorsBySubjectAndPrice(String searchSubject, BigDecimal maxPrice) {
 		
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query<User> query = currentSession.createQuery("select c.instructor from Course c "
-				+ "c.subject.name=:searchSubject and "
-				+ "c.price < :maxPrice", User.class);
+				+ "where c.subject.name=:searchSubject "
+				+ "and c.price < :maxPrice", User.class);
 		query.setParameter("searchSubject", searchSubject);
 		query.setParameter("maxPrice", maxPrice);
 		

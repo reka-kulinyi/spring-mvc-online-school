@@ -1,5 +1,6 @@
 package com.onlineschool.demo.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,9 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional
 	public List<User> getInstructorsBySubjectAndPrice(String searchSubject, double maxPrice) {
-		return userDao.getInstructorsBySubjectAndPrice(searchSubject, maxPrice);
+		BigDecimal bd = new BigDecimal(maxPrice);
+		return userDao.getInstructorsBySubjectAndPrice(searchSubject, bd);
+
 	}
 	
 	
