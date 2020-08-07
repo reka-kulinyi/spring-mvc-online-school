@@ -11,4 +11,6 @@ public interface UserDao {
 	User getInstructorById(long id);
 
 	List<User> getInstructorsBySubjectAndPrice(String searchSubject, BigDecimal maxPrice);
+
+	List<User> getNewestInstructors(int i);
 }

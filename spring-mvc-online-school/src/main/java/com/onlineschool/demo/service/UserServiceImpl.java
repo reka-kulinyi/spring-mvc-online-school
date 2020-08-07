@@ -35,6 +35,11 @@ public class UserServiceImpl implements UserService {
 		return userDao.getInstructorsBySubjectAndPrice(searchSubject, bd);
 
 	}
-	
+
+	@Override
+	@Transactional
+	public List<User> getNewestInstructors(int i) {
+		return userDao.getNewestInstructors(i);
+	}
 	
 }

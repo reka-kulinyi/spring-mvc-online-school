@@ -62,6 +62,25 @@ public class UserDaoImpl implements UserDao {
 		}
 		return instructors;
 	}
+
+	@Override
+	public List<User> getNewestInstructors(int n) {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<User> query = currentSession.createQuery("from User u "
+				+ "where u.isTeacher=true "
+				+ "order by createdAt desc", User.class);
+		query.setMaxResults(n);
+		
+		List<User> firstNInstructors = null;
+		
+		try {
+			firstNInstructors = query.getResultList();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return firstNInstructors;
+	}
 	
 	
 	

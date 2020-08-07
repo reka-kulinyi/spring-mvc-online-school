@@ -24,7 +24,8 @@ public class CourseDaoImpl implements CourseDao {
 			return null;
 		}
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Course where instructor=:instructor");
+		Query query = session.createQuery("from Course c where instructor=:instructor "
+				+ "order by c.subject.name");
 		query.setParameter("instructor", instructor);
 		List<Course> courses = null;
 		try {
