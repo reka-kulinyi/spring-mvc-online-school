@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.onlineschool.demo.entity.Course;
+import com.onlineschool.demo.entity.Subject;
 import com.onlineschool.demo.entity.User;
 import com.onlineschool.demo.service.CourseService;
+import com.onlineschool.demo.service.SubjectService;
 import com.onlineschool.demo.service.UserService;
 
 @Controller
@@ -22,6 +24,9 @@ public class DemoController {
 	@Autowired
 	private CourseService courseService;
 	
+	@Autowired 
+	private SubjectService subjectService;
+	
 	@GetMapping("/")
 	public String home(Model model) {
 		
@@ -30,7 +35,9 @@ public class DemoController {
 			List<Course> courses = courseService.getCoursesByInstructor(instructor);
 			instructor.setCourses(courses);
 		}
+		List<Subject> subjects = subjectService.getAllSubjects();
 		model.addAttribute("instructors", instructors);
+		model.addAttribute("subjects", subjects);
 		return "home";
 	}
 	

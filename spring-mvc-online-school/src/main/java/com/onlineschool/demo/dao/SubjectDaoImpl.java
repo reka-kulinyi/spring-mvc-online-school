@@ -1,5 +1,7 @@
 package com.onlineschool.demo.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -20,7 +22,8 @@ public class SubjectDaoImpl implements SubjectDao {
 			return null;
 		}
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query<Subject> query = currentSession.createQuery("from Subject where name:=subjectName");
+		Query<Subject> query = currentSession.createQuery("from Subject "
+				+ "where name:=subjectName", Subject.class);
 		query.setParameter("subjectName", subjectName);
 		Subject subject = null;
 		
@@ -31,5 +34,21 @@ public class SubjectDaoImpl implements SubjectDao {
 		}
 		return subject;
 	}
+
+	@Override
+	public List<Subject> getAllSubjects() {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<Subject> query = currentSession.createQuery("from Subject order by name", Subject.class);
+		List<Subject> subjects = null;
+		
+		try {
+			subjects = query.getResultList();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return subjects;
+	}
+	
+	
 
 }
