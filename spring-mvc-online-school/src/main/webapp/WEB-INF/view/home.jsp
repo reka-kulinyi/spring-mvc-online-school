@@ -13,6 +13,21 @@
 	<h2>Online School Home Page</h2>
 	
 	<div id="container">
+		<div>
+			<form:form action="search" method="GET">
+				<label for="selectSubject">Choose the subject that you would like to learn</label>
+				<select name="searchSubject" id="selectSubject">
+					<c:forEach var="subject" items="${subjects}">
+						<option value="${subject.name}">${subject.name}</option>					
+					</c:forEach>
+				</select>
+				<label for="setMaxPrice">Max price</label>
+				<input type="number" name="maxPrice" value="0" min="0" step="0.01"
+				placeholder="0.0" data-number-to-fixed="2" id="setMaxPrice"/>$
+				<input type="button" value="Search"/>
+			</form:form>
+		</div>
+		<br/>
 		<div id="content">
 			<table>
 				<tr>
