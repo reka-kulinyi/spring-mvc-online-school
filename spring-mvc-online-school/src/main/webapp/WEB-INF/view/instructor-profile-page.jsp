@@ -1,7 +1,9 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 
@@ -26,7 +28,9 @@
 		<c:choose>
 			<c:when test="${fn:length(instructor.courses) gt 0}">
 				<c:forEach var="course" items="${instructor.courses}">
-					${course.subject.name} ${course.price} 
+					${course.subject.name}
+					<fmt:setLocale value="en_US"/>
+					<fmt:formatNumber value="${course.price}" type="currency"/> |
 					<br/>
 				</c:forEach>
 			</c:when>
