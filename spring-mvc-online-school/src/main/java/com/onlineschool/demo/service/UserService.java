@@ -7,5 +7,6 @@ public interface UserService {
 
 	List<User> getAllInstructors();
 	User getInstructorById(long id);
+	List<User> getInstructorsBySubjectAndPrice(String searchSubject, double maxPrice);
 
 }

@@ -26,6 +26,12 @@ public class UserServiceImpl implements UserService {
 	public User getInstructorById(long id) {
 		return userDao.getInstructorById(id);
 	}
+
+	@Override
+	@Transactional
+	public List<User> getInstructorsBySubjectAndPrice(String searchSubject, double maxPrice) {
+		return userDao.getInstructorsBySubjectAndPrice(searchSubject, maxPrice);
+	}
 	
 	
 }

@@ -49,4 +49,18 @@ public class DemoController {
 		model.addAttribute("instructor", instructor);
 		return "instructor-profile-page";
 	}
+	
+	@GetMapping("/search")
+	public String searchInstructorsBySubjectAndPrice(
+			@RequestParam("searchSubject")String searchSubject, 
+			@RequestParam("maxPrice")double maxPrice, Model model) {
+		
+		List<User> instructors = userService.getInstructorsBySubjectAndPrice(searchSubject, maxPrice);
+		for(User teacher : instructors) {
+			List<Course> courses = courseService.getCoursesByInstructor(teacher);
+			teacher.setCourses(courses);
+		}
+		model.addAttribute("instructors", instructors);
+		return "instructor-list";
+	} 
 }

@@ -42,7 +42,26 @@ public class UserDaoImpl implements UserDao {
 		}
 		return user;
 	}
-	
-	
 
+	@Override
+	public List<User> getInstructorsBySubjectAndPrice(String searchSubject, double maxPrice) {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<User> query = currentSession.createQuery("select c.instructor from Course c "
+				+ "c.subject.name=:searchSubject and "
+				+ "c.price < :maxPrice", User.class);
+		query.setParameter("searchSubject", searchSubject);
+		query.setParameter("maxPrice", maxPrice);
+		
+		List<User> instructors = null;
+		try {
+			instructors = query.getResultList();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return instructors;
+	}
+	
+	
+	
 }
