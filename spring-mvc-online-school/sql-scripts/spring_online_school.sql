@@ -169,6 +169,7 @@ CREATE TABLE `review` (
   `student_id` INT(11) NOT NULL,
   `course_id` INT(11) NOT NULL,
   `review_text` VARCHAR(500) NOT NULL,
+  `created_at` DATETIME DEFAULT NOW(),
   
   PRIMARY KEY (`student_id`, `course_id`),
   
@@ -190,11 +191,13 @@ SET FOREIGN_KEY_CHECKS = 1;
 --
 -- Adding data for table 'review'
 --
-INSERT INTO `review` (student_id, course_id, review_text)
+INSERT INTO `review` (student_id, course_id, review_text, created_at)
 VALUES
-(4, 1, 'John is an amazing teacher, now I have all As in Maths!'), 
-(5, 2, 'John is an excellent instructor, I have so much more confidence now and I managed to pass my English language exam with flying colors'), 
-(4, 3, 'Rose is an excellent German teacher, she helped me rewrite my CV in german');
+(6, 1, 'John is an amazing teacher, now I have all As in Maths!', '2019-06-30'), 
+(7, 2, 'John is an excellent instructor, I have so much more confidence now and I managed to pass my English language exam with flying colors', '2020-05-04'), 
+(6, 3, 'Rose is an excellent German teacher, she helped me rewrite my CV in german', '2020-03-18'),
+(6, 5, 'Steven is an excellent Spanish teacher, he can explain even the hardest grammar concepts in an easy to understand way', '2019-10-26'),
+(7, 1, 'Since John teaches me Maths my grades got so much better that I am thinking about taking up Maths as a major :) ', '2020-05-06');
 
 --
 -- Table structure for table 'student_course'
