@@ -69,5 +69,12 @@ public class DemoController {
 		}
 		model.addAttribute("instructors", instructors);
 		return "instructor-list";
-	} 
+	}
+	
+	@GetMapping("instructors/all")
+	public String showAllInstructors(Model model) {
+		List<User> instructors = userService.getAllInstructors();
+		model.addAttribute("instructors", instructors);
+		return "instructors";
+	}
 }

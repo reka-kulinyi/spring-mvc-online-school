@@ -21,7 +21,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<User> getAllInstructors() {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query query = currentSession.createQuery("from User u "
+		Query<User> query = currentSession.createQuery("from User u "
 				+ "where u.isTeacher=true "
 				+ "order by lastName", User.class);
 		List<User> instructors = query.getResultList();

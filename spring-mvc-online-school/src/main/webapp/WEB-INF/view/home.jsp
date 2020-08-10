@@ -68,7 +68,9 @@ pageEncoding="UTF-8"%>
 						</tr>
 					</c:forEach>
 				</table>
+				<a href="${pageContext.request.contextPath}/instructors/all">All teachers</a>
 			</div>
+			<br/>
 			
 			<div id="latestReviews">
 				<h4>Latest reviews</h4>
