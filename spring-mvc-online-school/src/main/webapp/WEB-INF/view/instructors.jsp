@@ -10,31 +10,17 @@ pageEncoding="UTF-8"%>
 <html>
 
 <head>
-	<title>Online School Home Page</title>
+	<title>All instructors</title>
 </head>
 
 <body>
-	<h2>Online School Home Page</h2>
+	
 	
 	<div id="container">
-		<div>
-			<form:form action="search" method="GET">
-				<label for="selectSubject">Choose the subject that you would like to learn</label>
-				<select name="searchSubject" id="selectSubject">
-					<c:forEach var="subject" items="${subjects}">
-						<option value="${subject.name}">${subject.name}</option>					
-					</c:forEach>
-				</select>
-				<label for="setMaxPrice">Max price</label>
-				<input type="number" name="maxPrice" value="0" min="0" step="0.01"
-				placeholder="0.0" data-number-to-fixed="2" id="setMaxPrice"/>$
-				<input type="submit" value="Search"/>
-			</form:form>
-		</div>
-		<br/>
 		<div id="content">
-			<div id="newTeachers">
-				<h4>Our newly registered teachers</h4>
+			<h2>All instructors</h2>
+			<div id="teachers">
+				<h4>All teachers</h4>
 				<table>
 					<tr>
 						<th>Instructor name</th>
@@ -68,23 +54,10 @@ pageEncoding="UTF-8"%>
 						</tr>
 					</c:forEach>
 				</table>
-				<a href="${pageContext.request.contextPath}/instructors/all">All teachers</a>
 			</div>
 			<br/>
-			
-			<div id="latestReviews">
-				<h4>Latest reviews</h4>
-				<c:forEach var="review" items="${recentReviews}">
-					<c:url var="linkToProfile" value="/instructors">
-						<c:param name="instructorId" value="${review.course.instructor.id}"/>
-					</c:url>
-					<div id ="review">
-						<p>About <a href="${linkToProfile}">
-						${review.course.instructor.firstName} ${review.course.instructor.lastName}</a>
-						</p>
-						<p>${review.text} ${review.createdAt} by ${review.student.firstName} ${review.student.lastName}</p>
-					</div>
-				</c:forEach>
+			<div>
+				<a href="${pageContext.request.contextPath}/">Back to main page</a>
 			</div>
 		</div>
 	</div>

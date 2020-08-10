@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -49,15 +50,15 @@ public class User {
     @Column(name="introduction")
     private String introduction;
     
-    @ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-    @JoinTable(name="users_roles",
-    joinColumns=@JoinColumn(name="user_id"),
-    inverseJoinColumns=@JoinColumn(name="role_id"))
-    private Collection<Role> roles;
-    
-    @OneToMany(mappedBy="instructor",
-    cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Course> courses;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name="users_roles",
+	joinColumns=@JoinColumn(name="user_id"),
+	inverseJoinColumns=@JoinColumn(name="role_id"))
+	private Set<Role> roles;
+	
+	@OneToMany(mappedBy="instructor", fetch = FetchType.EAGER,
+	cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+	private List<Course> courses;
 
     // - - - constructors - - -
 	public User() {
@@ -74,7 +75,7 @@ public class User {
 	}
 	
 	public User(String firstName, String lastName, String email, String password, 
-			boolean isTeacher, String introduction, Collection<Role> roles) {
+			boolean isTeacher, String introduction, Set<Role> roles) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -85,7 +86,7 @@ public class User {
 	}
 	
 	public User(String firstName, String lastName, String email, boolean isTeacher, 
-			LocalDate createdAt, String introduction, Collection<Role> roles, List<Course> courses) {
+			LocalDate createdAt, String introduction, Set<Role> roles, List<Course> courses) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -175,11 +176,11 @@ public class User {
 		this.createdAt = createdAt;
 	}
 
-	public Collection<Role> getRoles() {
+	public Set<Role> getRoles() {
 		return roles;
 	}
 
-	public void setRoles(Collection<Role> roles) {
+	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
 	}
 	
