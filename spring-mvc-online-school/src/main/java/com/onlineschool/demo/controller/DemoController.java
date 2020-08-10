@@ -47,7 +47,9 @@ public class DemoController {
 	@GetMapping("/instructors")
 	public String showInstructorProfile(@RequestParam("instructorId")long id, Model model) {
 		User instructor = userService.getInstructorById(id);
+		List<Review> reviews = reviewService.getReviewsByInstructor(id);
 		model.addAttribute("instructor", instructor);
+		model.addAttribute("reviews", reviews);
 		return "instructor-profile-page";
 	}
 	

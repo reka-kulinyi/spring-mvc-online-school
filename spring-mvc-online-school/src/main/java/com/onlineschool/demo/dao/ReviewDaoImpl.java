@@ -33,4 +33,23 @@ public class ReviewDaoImpl implements ReviewDao {
 		return recentReviews;
 	}
 
+	@Override
+	public List<Review> getReviewsByInstructor(long id) {
+		
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<Review> query = currentSession.createQuery("select r from Review r "
+				+ "where r.course.instructor.id=:id", Review.class);
+		query.setParameter("id", id);
+		List<Review> reviews = null;
+		
+		try {
+			reviews = query.getResultList();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return reviews;
+	}
+	
+	
+
 }

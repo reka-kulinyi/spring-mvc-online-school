@@ -54,7 +54,7 @@ pageEncoding="UTF-8"%>
 								<p>
 									by ${review.student.firstName} ${review.student.lastName}
 									about ${instructor.firstName} ${instructor.lastName}'s 
-									${review.course.name} course
+									${review.course.subject.name} course
 								</p>
 								<br/>
 							</c:forEach>

@@ -7,6 +7,7 @@ import com.onlineschool.demo.entity.Review;
 public interface ReviewService {
 
 	List<Review> getRecentReviews(int i);
-	
+
+	List<Review> getReviewsByInstructor(long id);
 	
 }

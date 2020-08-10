@@ -21,4 +21,10 @@ public class ReviewServiceImpl implements ReviewService {
 		return reviewDao.getRecentReviews(i);
 	}
 
+	@Override
+	@Transactional
+	public List<Review> getReviewsByInstructor(long id) {
+		return reviewDao.getReviewsByInstructor(id);
+	}
+
 }

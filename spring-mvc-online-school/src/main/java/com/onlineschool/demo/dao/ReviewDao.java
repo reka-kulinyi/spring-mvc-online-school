@@ -8,4 +8,6 @@ public interface ReviewDao {
 
 	List<Review> getRecentReviews(int i);
 
+	List<Review> getReviewsByInstructor(long id);
+
 }
