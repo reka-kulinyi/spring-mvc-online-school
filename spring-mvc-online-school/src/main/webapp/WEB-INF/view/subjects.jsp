@@ -22,11 +22,11 @@ pageEncoding="UTF-8"%>
 					<c:choose>
 						<c:when test="${fn:length(subjects) gt 0}">
 							<c:forEach var="subject" items="${subjects}">
-								<c:url var="subjectLink" value="/subjects">
-									<c:param name="subjectId" value="${subject.id}"/>
+								<c:url var="linkToSubjectTeachers" value="/instructors/subjects">
+									<c:param name="subjectName" value="${subject.name}"/>
 								</c:url>
 								<div>
-									<a href="${subjectLink}">${subject.name}</a>
+									<a href="${linkToSubjectTeachers}">${subject.name}</a>
 								</div>
 							</c:forEach>
 						</c:when>

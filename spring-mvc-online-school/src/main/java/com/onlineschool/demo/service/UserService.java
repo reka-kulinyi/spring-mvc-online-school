@@ -9,5 +9,6 @@ public interface UserService {
 	User getInstructorById(long id);
 	List<User> getInstructorsBySubjectAndPrice(String searchSubject, double maxPrice);
 	List<User> getNewestInstructors(int i);
+	List<User> getInstructorsBySubject(String subjectName);
 
 }

@@ -84,4 +84,12 @@ public class DemoController {
 		model.addAttribute("subjects", allSubjects);
 		return "subjects";
 	}
+	
+	@GetMapping("/instructors/subjects")
+	public String showInstructorsBySubject(@RequestParam("subjectName")String subjectName,
+			Model model) {
+		List<User> instructorsBySubject = userService.getInstructorsBySubject(subjectName);
+		model.addAttribute("instructors", instructorsBySubject);
+		return "instructor-list";
+	}
 }

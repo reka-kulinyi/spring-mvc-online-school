@@ -81,7 +81,22 @@ public class UserDaoImpl implements UserDao {
 		}
 		return firstNInstructors;
 	}
-	
-	
-	
+
+	@Override
+	public List<User> getInstructorsBySubject(String subject) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		Query<User> query = session.createQuery("select c.instructor from Course c where "
+				+ "c.subject.name=:subject", User.class);
+		query.setParameter("subject", subject);
+		
+		List<User> instructors = null;
+		
+		try {
+			instructors = query.getResultList();
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return instructors;
+	}
 }

@@ -42,4 +42,10 @@ public class UserServiceImpl implements UserService {
 		return userDao.getNewestInstructors(i);
 	}
 	
+	@Override
+	@Transactional
+	public List<User> getInstructorsBySubject(String subject) {
+		return userDao.getInstructorsBySubject(subject);
+	}
+	
 }
