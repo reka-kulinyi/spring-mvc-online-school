@@ -70,6 +70,20 @@ pageEncoding="UTF-8"%>
 				</table>
 			</div>
 			
+			<div id="latestReviews">
+				<h4>Latest reviews</h4>
+				<c:forEach var="review" items="${recentReviews}">
+					<c:url var="linkToProfile" value="/instructors">
+						<c:param name="instructorId" value="${review.course.instructor.id}"/>
+					</c:url>
+					<div id ="review">
+						<p>About <a href="${linkToProfile}">
+						${review.course.instructor.firstName} ${review.course.instructor.lastName}</a>
+						</p>
+						<p>${review.text} ${review.createdAt} by ${review.student.firstName} ${review.student.lastName}</p>
+					</div>
+				</c:forEach>
+			</div>
 		</div>
 	</div>
 </body>
