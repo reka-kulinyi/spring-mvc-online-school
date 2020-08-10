@@ -36,10 +36,6 @@ public class DemoController {
 	public String home(Model model) {
 		
 		List<User> instructors = userService.getNewestInstructors(4);
-		for(User instructor : instructors) {
-			List<Course> courses = courseService.getCoursesByInstructor(instructor);
-			instructor.setCourses(courses);
-		}
 		List<Subject> subjects = subjectService.getAllSubjects();
 		List<Review> recentReviews = reviewService.getRecentReviews(4);
 		model.addAttribute("recentReviews", recentReviews);
@@ -51,8 +47,6 @@ public class DemoController {
 	@GetMapping("/instructors")
 	public String showInstructorProfile(@RequestParam("instructorId")long id, Model model) {
 		User instructor = userService.getInstructorById(id);
-		List<Course> courses = courseService.getCoursesByInstructor(instructor);
-		instructor.setCourses(courses);
 		model.addAttribute("instructor", instructor);
 		return "instructor-profile-page";
 	}

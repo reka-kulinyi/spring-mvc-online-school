@@ -14,33 +14,56 @@ pageEncoding="UTF-8"%>
 	<body>
 		<div id="container">
 			<div id="content">
-				<h2>${instructor.firstName} ${instructor.lastName}</h2>
-				<p>${instructor.email}</p>
-				<p>Introduction</p>
-				<c:choose>
-					<c:when test="${instructor.introduction != null}">
-						<p>${instructor.introduction}</p>
-					</c:when>
-					<c:otherwise>
-						No introduction
-					</c:otherwise>
-				</c:choose>		
+				<div>
+					<h2>${instructor.firstName} ${instructor.lastName}</h2>
+					<p>${instructor.email}</p>
+					<p>Introduction</p>
+					<c:choose>
+						<c:when test="${instructor.introduction != null}">
+							<p>${instructor.introduction}</p>
+						</c:when>
+						<c:otherwise>
+							No introduction
+						</c:otherwise>
+					</c:choose>
+				</div>
 				<br/>
-				<p>Courses : </p>
-				<c:choose>
-					<c:when test="${fn:length(instructor.courses) gt 0}">
-						<c:forEach var="course" items="${instructor.courses}">
-							${course.subject.name}
-							<fmt:setLocale value="en_US"/>
-							<fmt:formatNumber value="${course.price}" type="currency"/> |
-							<br/>
-						</c:forEach>
-					</c:when>
-					<c:otherwise>
-						No courses
-					</c:otherwise>
-				</c:choose>
-				
+				<div>
+					<h4>Courses:</h4>
+					<c:choose>
+						<c:when test="${fn:length(instructor.courses) gt 0}">
+							<c:forEach var="course" items="${instructor.courses}">
+								${course.subject.name}
+								<fmt:setLocale value="en_US"/>
+								<fmt:formatNumber value="${course.price}" type="currency"/> |
+								<br/>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							No courses
+						</c:otherwise>
+					</c:choose>
+				</div>
+				<br/>
+				<div>
+					<h4>Reviews:</h4>
+					<c:choose>
+						<c:when test="${fn:length(reviews) gt 0}">
+							<c:forEach var="review" items="${reviews}">
+								<p>${review.text}</p>
+								<p>
+									by ${review.student.firstName} ${review.student.lastName}
+									about ${instructor.firstName} ${instructor.lastName}'s 
+									${review.course.name} course
+								</p>
+								<br/>
+							</c:forEach>
+						</c:when>
+						<c:otherwise>
+							No reviews yet
+						</c:otherwise>
+					</c:choose>
+				</div>
 				<div>
 					<a href="${pageContext.request.contextPath}/">Back to main page</a>
 				</div>
