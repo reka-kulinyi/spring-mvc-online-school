@@ -86,6 +86,10 @@ pageEncoding="UTF-8"%>
 					</div>
 				</c:forEach>
 			</div>
+			
+			<div>
+				<a href="${pageContext.request.contextPath}/subjects/all">All subjects</a>
+			</div>
 		</div>
 	</div>
 </body>

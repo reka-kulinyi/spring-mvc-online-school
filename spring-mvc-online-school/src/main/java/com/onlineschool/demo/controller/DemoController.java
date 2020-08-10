@@ -77,4 +77,11 @@ public class DemoController {
 		model.addAttribute("instructors", instructors);
 		return "instructors";
 	}
+	
+	@GetMapping("subjects/all")
+	public String showAllSubjects(Model model) {
+		List<Subject> allSubjects = subjectService.getAllSubjects();
+		model.addAttribute("subjects", allSubjects);
+		return "subjects";
+	}
 }

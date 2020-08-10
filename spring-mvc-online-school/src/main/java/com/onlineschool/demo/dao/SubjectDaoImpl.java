@@ -38,7 +38,8 @@ public class SubjectDaoImpl implements SubjectDao {
 	@Override
 	public List<Subject> getAllSubjects() {
 		Session currentSession = sessionFactory.getCurrentSession();
-		Query<Subject> query = currentSession.createQuery("from Subject order by name", Subject.class);
+		Query<Subject> query = currentSession.createQuery("from Subject order by name", 
+				Subject.class);
 		List<Subject> subjects = null;
 		
 		try {

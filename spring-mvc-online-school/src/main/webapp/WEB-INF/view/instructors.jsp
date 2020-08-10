@@ -15,7 +15,6 @@ pageEncoding="UTF-8"%>
 
 <body>
 	
-	
 	<div id="container">
 		<div id="content">
 			<h2>All instructors</h2>
