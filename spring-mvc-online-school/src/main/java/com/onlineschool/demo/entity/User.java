@@ -29,6 +29,9 @@ public class User {
 	@Column(name="id")
 	private Long id;
 	
+	@Column(name="username")
+	private String username;
+	
 	@Column(name="first_name")
 	private String firstName;
 	
@@ -64,8 +67,9 @@ public class User {
 	public User() {
 	}
 
-	public User(String firstName, String lastName, String email, String password, 
+	public User(String username, String firstName, String lastName, String email, String password, 
 			boolean isTeacher, String introduction) {
+		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -74,8 +78,9 @@ public class User {
 		this.introduction = introduction;
 	}
 	
-	public User(String firstName, String lastName, String email, String password, 
+	public User(String username, String firstName, String lastName, String email, String password, 
 			boolean isTeacher, String introduction, Set<Role> roles) {
+		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -85,8 +90,9 @@ public class User {
 		this.roles = roles;
 	}
 	
-	public User(String firstName, String lastName, String email, boolean isTeacher, 
+	public User(String username, String firstName, String lastName, String email, boolean isTeacher, 
 			LocalDate createdAt, String introduction, Set<Role> roles, List<Course> courses) {
+		this.username = username;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
@@ -118,6 +124,14 @@ public class User {
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public String getFirstName() {
@@ -192,12 +206,12 @@ public class User {
 		this.courses = courses;
 	}
 
-	// // - - - toString() - - -
+	// - - - toString() - - -
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", isTeacher=" + isTeacher + ", createdAt=" + createdAt + ", roles=" + roles + ", courses=" + courses
-				+ "]";
+		return "User [id=" + id + ", username=" + username + ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", isTeacher=" + isTeacher + ", createdAt=" + createdAt + ", introduction="
+				+ introduction + ", roles=" + roles + ", courses=" + courses + "]";
 	}
 
 }

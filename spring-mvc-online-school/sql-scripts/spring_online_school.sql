@@ -11,6 +11,7 @@ DROP TABLE IF EXISTS `user`;
 
 CREATE TABLE `user` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`username` VARCHAR(40) NOT NULL,
 	`password` VARCHAR(150) NOT NULL,
 	`first_name` VARCHAR(50) NOT NULL,
 	`last_name` VARCHAR(50) NOT NULL,
@@ -29,16 +30,16 @@ CREATE TABLE `user` (
 -- Default password for all the populated users is: fun123
 --
 
-INSERT INTO `user` (email, password, first_name, last_name, is_teacher, created_at, introduction)
+INSERT INTO `user` (username, email, password, first_name, last_name, is_teacher, created_at, introduction)
 VALUES 
-('john@hamstermail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','John','Taylor', 1, '2019-05-25', 'John lorem ipsum...'),
-('rose@hamstermail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Rose','Smith', 1, '2020-01-12', 'Rose lorem ipsum...'),
-('steven@parrotmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Steve','Wright', 1, '2019-08-04', 'Steven lorem ipsum...'),
-('jane@parrotmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Jane','White', 1, date_sub(NOW(), INTERVAL 1 DAY), 'Jane lorem ipsum...'),
-('joe@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Joe','Wright', 1, '2020-06-28', NULL),
-('mary@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Mary','Smith', 0, '2018-11-26', NULL),
-('james@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','James','Anderson', 0, '2020-04-30', NULL),
-('tom@adminmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Tom','Admin', 0,'2018-10-24', NULL);
+('john','john@hamstermail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','John','Taylor', 1, '2019-05-25', 'John lorem ipsum...'),
+('rose','rose@hamstermail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Rose','Smith', 1, '2020-01-12', 'Rose lorem ipsum...'),
+('steven','steven@parrotmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Steve','Wright', 1, '2019-08-04', 'Steven lorem ipsum...'),
+('jane','jane@parrotmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Jane','White', 1, date_sub(NOW(), INTERVAL 1 DAY), 'Jane lorem ipsum...'),
+('joe','joe@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Joe','Wright', 1, '2020-06-28', NULL),
+('mary','mary@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Mary','Smith', 0, '2018-11-26', NULL),
+('james','james@catmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','James','Anderson', 0, '2020-04-30', NULL),
+('tom','tom@adminmail.com','$2a$04$eFytJDGtjbThXa80FyOOBuFdK2IwjyWefYkMpiBEFlpBwDH.5PM0K','Tom','Admin', 0,'2018-10-24', NULL);
 
 
 --
