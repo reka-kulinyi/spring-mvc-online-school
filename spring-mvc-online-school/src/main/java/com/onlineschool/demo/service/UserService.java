@@ -10,5 +10,5 @@ public interface UserService {
 	List<User> getInstructorsBySubjectAndPrice(String searchSubject, double maxPrice);
 	List<User> getNewestInstructors(int i);
 	List<User> getInstructorsBySubject(String subjectName);
-
+	User findByUsername(String username);
 }

@@ -99,4 +99,29 @@ public class UserDaoImpl implements UserDao {
 		}
 		return instructors;
 	}
+
+	@Override
+	public User findUserByUsername(String username) {
+		
+		if(username == null || username.trim().length() == 0) {
+			return null;
+		}
+		
+		Session session = sessionFactory.getCurrentSession();
+		Query<User> query = session.createQuery("from User u "
+				+ "where u.username=:username", User.class);
+		query.setParameter("username", username);
+		
+		User user = null;
+		
+		try {
+			user = query.getSingleResult();
+		} catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		return user;
+	}
+	
+	
 }

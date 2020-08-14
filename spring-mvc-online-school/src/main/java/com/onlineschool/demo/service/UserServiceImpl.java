@@ -47,5 +47,13 @@ public class UserServiceImpl implements UserService {
 	public List<User> getInstructorsBySubject(String subject) {
 		return userDao.getInstructorsBySubject(subject);
 	}
+
+	@Override
+	@Transactional
+	public User findByUsername(String username) {
+		return userDao.findUserByUsername(username);
+	}
+	
+	
 	
 }

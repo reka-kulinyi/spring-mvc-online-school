@@ -15,4 +15,6 @@ public interface UserDao {
 	List<User> getNewestInstructors(int i);
 
 	List<User> getInstructorsBySubject(String subject);
+
+	User findUserByUsername(String username);
 }
