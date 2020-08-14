@@ -49,6 +49,28 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
 			<version>${hibernate.version}</version>
 		</dependency>
 		
+		<!-- Spring Security -->
+		<!-- spring-security-web and spring-security-config -->
+		
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>${springsecurity.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-config</artifactId>
+		    <version>${springsecurity.version}</version>
+		</dependency>	
+		
+		<!-- Add Spring Security Taglibs support -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-taglibs</artifactId>
+		    <version>${springsecurity.version}</version>
+		</dependency>
+		
 		<!-- Add MySQL and C3P0 support -->
 
 		<dependency>
