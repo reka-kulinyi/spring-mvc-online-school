@@ -3,8 +3,13 @@ package com.onlineschool.demo.user;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.onlineschool.demo.validation.FieldMatch;
 import com.onlineschool.demo.validation.ValidEmail;
 
+@FieldMatch.List({
+	@FieldMatch(first="password", second="matchingPassword", 
+			message="The password fields much match")
+})
 public class SchoolUser {
 
 	@NotNull(message="is required")
