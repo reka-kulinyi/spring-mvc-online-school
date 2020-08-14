@@ -10,10 +10,12 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.stereotype.Component;
 
 import com.onlineschool.demo.entity.User;
 import com.onlineschool.demo.service.UserService;
 
+@Component
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 	
 	@Autowired

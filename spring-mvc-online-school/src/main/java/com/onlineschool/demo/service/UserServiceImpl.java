@@ -2,8 +2,12 @@ package com.onlineschool.demo.service;
 
 import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
@@ -17,6 +21,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.onlineschool.demo.dao.RoleDao;
 import com.onlineschool.demo.dao.UserDao;
 import com.onlineschool.demo.entity.User;
+import com.onlineschool.demo.user.SchoolUser;
 import com.onlineschool.demo.entity.Role;
 
 @Service
@@ -84,5 +89,22 @@ public class UserServiceImpl implements UserService {
 	private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
 		return roles.stream().map(role -> new SimpleGrantedAuthority(role.getName())).collect(Collectors.toList());
 	}
-	
+
+	@Override
+	@Transactional
+	public void save(@Valid SchoolUser schooluser) {
+		
+		User user = new User();
+		user.setUsername(schooluser.getUsername());
+		user.setPassword(passwordEncoder.encode(schooluser.getPassword()));
+		user.setFirstName(schooluser.getFirstName());
+		user.setLastName(schooluser.getLastName());
+		user.setEmail(schooluser.getEmail());
+		user.setTeacher(true);
+		
+		Set<Role> defaultRole = new HashSet<>();
+		defaultRole.add(roleDao.getRoleByName("ROLE_TEACHER"));
+		user.setRoles(defaultRole);
+		userDao.save(user);
+	}
 }

@@ -122,6 +122,11 @@ public class UserDaoImpl implements UserDao {
 		
 		return user;
 	}
-	
-	
+
+	@Override
+	public void save(User user) {
+		
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(user);
+	}
 }

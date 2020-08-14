@@ -17,4 +17,6 @@ public interface UserDao {
 	List<User> getInstructorsBySubject(String subject);
 
 	User findUserByUsername(String username);
+
+	void save(User user);
 }

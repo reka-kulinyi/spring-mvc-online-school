@@ -2,6 +2,8 @@ package com.onlineschool.demo.controller;
 
 import java.util.logging.Logger;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.StringTrimmerEditor;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.onlineschool.demo.entity.User;
@@ -31,13 +35,13 @@ public class RegistrationController {
 		dataBinder.registerCustomEditor(String.class, stringTrimmerEditor);
 	}
 	
-	@GetMapping("/showRegistrationForm")
+	@GetMapping("/registrationForm")
 	public String showLoginPage(Model model) {
 		model.addAttribute("schoolUser", new SchoolUser());
 		return "registration-page";
 	}
 	
-	@PostMappping("/processRegistrationForm")
+	@PostMapping("/processRegistrationForm")
 	public String processRegistrationForm(
 			@Valid @ModelAttribute("schoolUser") SchoolUser schooluser,
 			BindingResult bindingResult,
@@ -55,7 +59,7 @@ public class RegistrationController {
 		User existing = userService.findByUsername(username);
 		if(existing != null) {
 			model.addAttribute("schoolUser", new SchoolUser());
-			model.addAttribute("registrationError", "Username already exists")
+			model.addAttribute("registrationError", "Username already exists");
 			
 			logger.warning("Username already exists");
 			return "registration-page";

@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.onlineschool.demo.entity.User;
+import com.onlineschool.demo.user.SchoolUser;
 
 public interface UserService extends UserDetailsService{
 
@@ -13,4 +14,5 @@ public interface UserService extends UserDetailsService{
 	List<User> getNewestInstructors(int i);
 	List<User> getInstructorsBySubject(String subjectName);
 	User findByUsername(String username);
+	void save(SchoolUser schooluser);
 }
