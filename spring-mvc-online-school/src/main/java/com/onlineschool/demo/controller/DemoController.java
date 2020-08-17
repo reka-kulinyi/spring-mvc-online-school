@@ -54,7 +54,15 @@ public class DemoController {
 	}
 	
 	@GetMapping("/instructors")
-	public String showInstructorProfile(@RequestParam("instructorId")long id, Model model) {
+	public String showInstructorProfile(@RequestParam("instructorId")long id, Model model){
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if(authentication != null) {
+			String username = authentication.getName();
+			User user = userService.findByUsername(username);
+			model.addAttribute("currentUser", user);
+		}
+		
 		User instructor = userService.getInstructorById(id);
 		List<Review> reviews = reviewService.getReviewsByInstructor(id);
 		model.addAttribute("instructor", instructor);
