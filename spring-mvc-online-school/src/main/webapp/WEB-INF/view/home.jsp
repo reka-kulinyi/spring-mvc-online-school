@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
@@ -17,6 +18,20 @@ pageEncoding="UTF-8"%>
 	<h2>Online School Home Page</h2>
 	
 	<div id="container">
+		<div>
+			<!-- Add login/logout button -->
+			<security:authorize access="isAuthenticated()">
+				<form:form action="${pageContext.request.contextPath}/logout" method="POST">
+					<input type="submit" value="Logout"/>
+				</form:form>
+			</security:authorize>
+			
+			<security:authorize access="!isAuthenticated()">
+				<form:form action="${pageContext.request.contextPath}/loginPage" method="GET">
+					<input type="submit" value="Login"/>
+				</form:form>
+			</security:authorize>
+		</div>
 		<div>
 			<form:form action="search" method="GET">
 				<label for="selectSubject">Choose the subject that you would like to learn</label>
