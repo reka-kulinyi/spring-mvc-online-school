@@ -33,6 +33,15 @@ pageEncoding="UTF-8"%>
 			</security:authorize>
 		</div>
 		<div>
+			<!-- link to my profile -->
+			<security:authorize access="isAuthenticated()">
+				<c:url var="myProfileLink" value="/instructors">
+					<c:param name="instructorId" value="${currentUser.id}"/>				
+				</c:url>
+				<a href="${myProfileLink}">My Profile</a>
+			</security:authorize>
+		</div>
+		<div>
 			<form:form action="search" method="GET">
 				<label for="selectSubject">Choose the subject that you would like to learn</label>
 				<select name="searchSubject" id="selectSubject">
