@@ -43,6 +43,7 @@ pageEncoding="UTF-8"%>
 									<c:if test="${currentUser.id == instructor.id}">
 										<c:url var="deleteLink" value="/course/delete">
 											<c:param name="courseId" value="${course.id}"/>
+											<c:param name="instructorId" value="${instructor.id}"/>
 										</c:url>
 										<a href="${deleteLink}"
 										onClick="if(!(confirm('Are you sure you want to delete this course?')))return false">

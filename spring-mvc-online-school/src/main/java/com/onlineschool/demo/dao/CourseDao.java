@@ -7,4 +7,6 @@ import com.onlineschool.demo.entity.User;
 
 public interface CourseDao {
 	List<Course> getCoursesByInstructor(User instructor);
+
+	void deleteCourseById(long courseId);
 }

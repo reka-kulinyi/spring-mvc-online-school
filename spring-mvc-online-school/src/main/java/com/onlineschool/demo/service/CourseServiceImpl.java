@@ -22,4 +22,11 @@ public class CourseServiceImpl implements CourseService {
 		return courseDao.getCoursesByInstructor(instructor);
 	}
 
+	@Override
+	@Transactional
+	public void deleteCourseById(long courseId) {
+		courseDao.deleteCourseById(courseId);		
+	}
+
+	
 }

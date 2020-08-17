@@ -8,4 +8,6 @@ import com.onlineschool.demo.entity.User;
 public interface CourseService {
 	
 	List<Course> getCoursesByInstructor(User instructor);
+
+	void deleteCourseById(long courseId);
 }

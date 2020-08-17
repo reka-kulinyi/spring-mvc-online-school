@@ -2,7 +2,9 @@ package com.onlineschool.demo.dao;
 
 import java.util.List;
 
-import javax.persistence.Query;
+import javax.persistence.PersistenceException;
+
+import org.hibernate.query.Query;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,8 +26,8 @@ public class CourseDaoImpl implements CourseDao {
 			return null;
 		}
 		Session session = sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Course c where instructor=:instructor "
-				+ "order by c.subject.name");
+		Query<Course> query = session.createQuery("from Course c where instructor=:instructor "
+				+ "order by c.subject.name", Course.class);
 		query.setParameter("instructor", instructor);
 		List<Course> courses = null;
 		try {
@@ -35,5 +37,20 @@ public class CourseDaoImpl implements CourseDao {
 		}
 		return courses;
 	}
+
+	@Override
+	public void deleteCourseById(long courseId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query query = currentSession.createQuery("delete from Course "
+				+ "where id=:courseId");
+		query.setParameter("courseId", courseId);
+		try {
+			query.executeUpdate();
+		} catch(PersistenceException | IllegalStateException ex) {
+			ex.printStackTrace();
+		}
+	}
+	
+	
 
 }
