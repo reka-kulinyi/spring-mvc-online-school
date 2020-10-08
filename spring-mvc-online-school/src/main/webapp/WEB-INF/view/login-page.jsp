@@ -21,43 +21,52 @@
 <body>
 	<div class="container">
 		<div id="loginbox" style="margin-top: 50px;"
-		class="col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2">
-			<!-- Login form -->
-			<form action="${pageContext.request.contextPath}/authenticateTheUser" 
-			method="POST" class="form-horizontal">
-				<div class="form-group">
-					<c:if test="${param.error != null}">
-						<div class="alert alert-danger col-xs-offset-1 col-xs-10"">
-							Invalid username and password
+		class="col-md-3 col-md-offset-2 col-sm-6 col-sm-offset-2 mainbox">
+			<div class="panel panel-info">
+
+				<div class="panel-heading">
+					<div class="panel-title">Sign In</div>
+				</div>
+
+				<div style="padding-top: 30px" class="panel-body">
+					<!-- Login form -->
+					<form action="${pageContext.request.contextPath}/authenticateTheUser" 
+					method="POST" class="form-horizontal">
+						<div class="form-group">
+							<c:if test="${param.error != null}">
+								<div class="alert alert-danger col-xs-offset-1 col-xs-10"">
+									Invalid username and password
+								</div>
+							</c:if>
+							
+							<c:if test="${param.logout != null}">
+								<div class="alert alert-success col-xs-offset-1 col-xs-10">
+									You have been logged out
+								</div>
+							</c:if>
 						</div>
-					</c:if>
-					
-					<c:if test="${param.logout != null}">
-						<div class="alert alert-success col-xs-offset-1 col-xs-10"">
-							You have been logged out
+						
+						<!-- User name -->			
+						<div style="margin-bottom: 25px" class="input-group">
+							<input type="text" name="username" placeholder="username" class="form-control"/>
 						</div>
-					</c:if>
+						
+						<!-- Password -->			
+						<div style="margin-bottom: 25px" class="input-group">
+							<input type="password" name="password" placeholder="password" class="form-control"/>
+						</div>
+						
+						<div style="margin-top: 10px" class="form-group,col-sm-6 controls">
+							<input type="submit" class="btn btn-success" value="Login"/>
+						</div>
+						
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+					</form>
 				</div>
-				
-				<!-- User name -->			
-				<div style="margin-bottom: 25px" class="input-group">
-					<input type="text" name="username" placeholder="username" class="form-control"/>
-				</div>
-				
-				<!-- Password -->			
-				<div style="margin-bottom: 25px" class="input-group">
-					<input type="password" name="password" placeholder="password" class="form-control"/>
-				</div>
-				
-				<div style="margin-top: 10px" class="form-group,col-sm-6 controls">
-					<input type="submit" class="btn btn-success" value="Login"/>
-				</div>
-				
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-			</form>
+			</div>
 		</div>
-		<br/>
-		<div class="col-sm-6 controls">
+	
+		<div class="col-sm-6 col-sm-offset-2 controls">
 			<a href="${pageContext.request.contextPath}/register/registrationForm"
 			class="btn btn-primary" role="button">
 			Register new user</a>
