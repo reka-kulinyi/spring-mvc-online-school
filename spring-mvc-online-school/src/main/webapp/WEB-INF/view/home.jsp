@@ -11,36 +11,50 @@ pageEncoding="UTF-8"%>
 <html>
 
 <head>
+	
 	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<!-- Reference Bootstrap files -->
-	<link rel="stylesheet"
-		 href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-	
-	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
-	
-	<title>Online School Home Page</title>
+		<!-- Reference Bootstrap files -->
+		<link rel="stylesheet"
+			 href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+		
+		<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
+		<style>
+			form div{display: flex;
+			  align-items: center;
+			  justify-content: center;}
+		</style>
+		<title>Online School Home Page</title>
 </head>
 
 <body>
 	<div id="container">
 		<%@ include file="navbar.jsp" %>
-		<div>
-			<form:form action="search" method="GET">
-				<label for="selectSubject">Choose the subject that you would like to learn</label>
-				<select name="searchSubject" id="selectSubject">
-					<c:forEach var="subject" items="${subjects}">
-						<option value="${subject.name}">${subject.name}</option>					
-					</c:forEach>
-				</select>
-				<label for="setMaxPrice">Max price</label>
-				<input type="number" name="maxPrice" value="0" min="0" step="0.01"
-				placeholder="0.0" data-number-to-fixed="2" id="setMaxPrice"/>$
-				<input type="submit" value="Search"/>
+		<div class="row">
+			<form:form action="search" method="GET" class="form-horizontal">
+				<div class="col-sm-4">
+					<label for="selectSubject">Choose subject</label>
+				
+					<select name="searchSubject" id="selectSubject" class="form-control">
+						<c:forEach var="subject" items="${subjects}">
+							<option value="${subject.name}">${subject.name}</option>					
+						</c:forEach>
+					</select>
+				</div>
+			
+				<div class="col-sm-4">
+					<label for="setMaxPrice">Max price</label>
+			
+					<input type="number" name="maxPrice" value="0" min="0" step="0.01"
+					placeholder="0.0" data-number-to-fixed="2" id="setMaxPrice" class="form-control"/>$
+				</div>
+				<div class="col-sm-2 controls">
+					<input type="submit" value="Search" class="btn btn-default"/>
+				</div>
 			</form:form>
 		</div>
 		<br/>
