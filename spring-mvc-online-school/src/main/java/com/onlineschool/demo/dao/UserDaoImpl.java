@@ -3,6 +3,7 @@ package com.onlineschool.demo.dao;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.persistence.PersistenceException;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -24,7 +25,12 @@ public class UserDaoImpl implements UserDao {
 		Query<User> query = currentSession.createQuery("from User u "
 				+ "where u.isTeacher=true "
 				+ "order by lastName", User.class);
-		List<User> instructors = query.getResultList();
+		List<User> instructors = null;
+		try{
+			instructors = query.getResultList();
+		} catch(PersistenceException ex) {
+			ex.printStackTrace();
+		}
 		return instructors;
  	}
 
@@ -38,9 +44,26 @@ public class UserDaoImpl implements UserDao {
 		User user = null;
 		try {
 			user = query.getSingleResult();
-		} catch(Exception ex) {
+		} catch(PersistenceException ex) {
 			ex.printStackTrace();
 		}
+		return user;
+	}
+	
+	@Override
+	public User getUserById(long userId) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		Query<User> query = 
+				currentSession.createQuery("from User u where u.id=:id", User.class);
+		query.setParameter("id", userId);
+		
+		User user = null;
+		try {
+			user = query.getSingleResult();
+		} catch(PersistenceException ex) {
+			ex.printStackTrace();
+		}
+			
 		return user;
 	}
 
@@ -57,7 +80,7 @@ public class UserDaoImpl implements UserDao {
 		List<User> instructors = null;
 		try {
 			instructors = query.getResultList();
-		} catch(Exception ex) {
+		} catch(PersistenceException ex) {
 			ex.printStackTrace();
 		}
 		return instructors;
@@ -76,7 +99,7 @@ public class UserDaoImpl implements UserDao {
 		
 		try {
 			firstNInstructors = query.getResultList();
-		} catch(Exception ex) {
+		} catch(PersistenceException ex) {
 			ex.printStackTrace();
 		}
 		return firstNInstructors;
@@ -94,7 +117,7 @@ public class UserDaoImpl implements UserDao {
 		
 		try {
 			instructors = query.getResultList();
-		}catch(Exception ex) {
+		}catch(PersistenceException ex) {
 			ex.printStackTrace();
 		}
 		return instructors;
@@ -116,7 +139,7 @@ public class UserDaoImpl implements UserDao {
 		
 		try {
 			user = query.getSingleResult();
-		} catch(Exception ex) {
+		} catch(PersistenceException ex) {
 			ex.printStackTrace();
 		}
 		

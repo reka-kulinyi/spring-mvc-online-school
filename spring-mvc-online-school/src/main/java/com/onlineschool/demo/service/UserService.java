@@ -15,4 +15,5 @@ public interface UserService extends UserDetailsService{
 	List<User> getInstructorsBySubject(String subjectName);
 	User findByUsername(String username);
 	void save(SchoolUser schooluser);
+	User getUserById(long userId);
 }
