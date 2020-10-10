@@ -40,14 +40,25 @@ pageEncoding="UTF-8"%>
 						<h2>${instructor.firstName} ${instructor.lastName}</h2>
 					</div>
 					
-					<!-- Update profile link -->
 					<security:authorize access="isAuthenticated()">
 						<div>
 							<c:if test="${currentUser.id == instructor.id}">
-								<c:url var="updateProfileLink" value="/instructors/updateForm">
+								<!-- Update profile link -->
+								<div>
+									<c:url var="updateProfileLink" value="/instructors/updateForm">
 									<c:param name="userId" value="${instructor.id}"/>
-								</c:url>
-								<a href="${updateProfileLink}">Update profile</a>
+									</c:url>
+									<a href="${updateProfileLink}">Update profile</a>
+								</div>
+								
+								<!-- Update profile link -->
+								<div>
+									<c:url var="addNewCourseLink" value="/courses/addNewCourse">
+									<c:param name="userId" value="${instructor.id}"/>
+									</c:url>
+									<a href="${addNewCourseLink}">Add new course</a>
+								</div>
+								
 							</c:if>
 						</div>
 					</security:authorize>
