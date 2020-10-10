@@ -22,7 +22,7 @@
 			<div id="content" class="col-sm-10 offset-sm-1">
 				<h3>Update user</h3>
 				
-				<form:form action="${pageContent.request.contextPath}/users/update/${schoolUserForUpdate.id}"
+				<form:form action="${pageContext.request.contextPath}/users/update/${schoolUserForUpdate.id}"
 				modelAttribute="schoolUserForUpdate" method="POST" class="form-horizontal">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 					

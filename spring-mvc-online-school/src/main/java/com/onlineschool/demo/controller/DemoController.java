@@ -142,7 +142,7 @@ public class DemoController {
 		logger.info("Processing update form for " + originalUsername);
 		
 		if(bindingResult.hasErrors()) {
-			return "instructor-update-form";
+			return "user-update-form";
 		}
 		
 		userService.save(userForUpdate, userToUpdate);
