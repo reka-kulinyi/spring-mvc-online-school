@@ -13,29 +13,29 @@ pageEncoding="UTF-8"%>
 <head>
 	
 	<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Reference Bootstrap files -->
+	<link rel="stylesheet"
+		 href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	
-		<!-- Reference Bootstrap files -->
-		<link rel="stylesheet"
-			 href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-		
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
-		
-		<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
-		<style>
-			form div{display: flex;
-			  align-items: center;
-			  justify-content: center;}
-			  #newTeachers{margin-top: 2em;}
-			  #content{margin-top: 2em;}
-			  .review{margin-top: 1.5em; 
-			  	background-color:rgb(246, 246, 246); 
-			  	padding: 5px;
-			  	border-radius: 4px;}
-			  .review p{ margin: 4px 5px;}
-		</style>
-		<title>Online School Home Page</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+	
+	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
+	<style>
+		form div{display: flex;
+		  align-items: center;
+		  justify-content: center;}
+		  #newTeachers{margin-top: 2em;}
+		  #content{margin-top: 2em;}
+		  .review{margin-top: 1.5em; 
+		  	background-color:rgb(246, 246, 246); 
+		  	padding: 5px;
+		  	border-radius: 4px;}
+		  .review p{ margin: 4px 5px;}
+	</style>
+	<title>Online School Home Page</title>
 </head>
 
 <body>

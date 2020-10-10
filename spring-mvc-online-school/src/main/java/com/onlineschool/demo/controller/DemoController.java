@@ -121,6 +121,6 @@ public class DemoController {
 		userForUpdate.setUsername(user.getUsername());
 		userForUpdate.setIntroduction(user.getIntroduction());
 		model.addAttribute("schoolUserForUpdate", userForUpdate);
-		return "instructor-update-form";
+		return "user-update-form";
 	}
 }
