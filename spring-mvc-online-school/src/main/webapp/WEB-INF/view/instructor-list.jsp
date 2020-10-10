@@ -21,6 +21,10 @@
 	
 	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
+	
+	<style>
+		#content{margin-top: 2em;}
+	</style>
 	<title>Online School Instructors List</title>
 </head>
 
@@ -28,14 +32,14 @@
 	
 	<div id="container">
 		<%@ include file="navbar.jsp" %>
-		<div id="content">
+		<div id="content" class="col-sm-10 offset-sm-1">
 			<h2>Instructors</h2>
 					<div>
 						<c:choose>
 						<c:when test="${fn:length(instructors) gt 0}">
-							<table>
+							<table class="table table-condensed table-hover">
 								<tr>
-									<th>Instructor name</th>
+									<th>Name</th>
 									<th>Teaches since</th>
 									<th>Courses</th>
 								</tr>

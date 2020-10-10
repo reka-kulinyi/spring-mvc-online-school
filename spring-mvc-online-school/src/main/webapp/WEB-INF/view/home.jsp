@@ -71,7 +71,7 @@ pageEncoding="UTF-8"%>
 				<h4>Our newly registered teachers</h4>
 				<table class="table table-condensed table-hover">
 					<tr>
-						<th>Instructor name</th>
+						<th>Name</th>
 						<th>Teaches since</th>
 						<th>Courses</th>
 					</tr>
