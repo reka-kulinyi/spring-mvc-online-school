@@ -27,6 +27,13 @@ pageEncoding="UTF-8"%>
 			form div{display: flex;
 			  align-items: center;
 			  justify-content: center;}
+			  #newTeachers{margin-top: 2em;}
+			  #content{margin-top: 2em;}
+			  .review{margin-top: 1.5em; 
+			  	background-color:rgb(246, 246, 246); 
+			  	padding: 5px;
+			  	border-radius: 4px;}
+			  .review p{ margin: 4px 5px;}
 		</style>
 		<title>Online School Home Page</title>
 </head>
@@ -34,7 +41,8 @@ pageEncoding="UTF-8"%>
 <body>
 	<div id="container">
 		<%@ include file="navbar.jsp" %>
-		<div class="row">
+		<div id="content" class="col-sm-10 offset-sm-1">
+		<div class="row" id="main-search">
 			<form:form action="search" method="GET" class="form-horizontal">
 				<div class="col-sm-4">
 					<label for="selectSubject">Choose subject</label>
@@ -58,10 +66,10 @@ pageEncoding="UTF-8"%>
 			</form:form>
 		</div>
 		<br/>
-		<div id="content">
+		
 			<div id="newTeachers">
 				<h4>Our newly registered teachers</h4>
-				<table>
+				<table class="table table-condensed table-hover">
 					<tr>
 						<th>Instructor name</th>
 						<th>Teaches since</th>
@@ -94,7 +102,7 @@ pageEncoding="UTF-8"%>
 						</tr>
 					</c:forEach>
 				</table>
-				<a href="${pageContext.request.contextPath}/instructors/all">All teachers</a>
+				<b><a href="${pageContext.request.contextPath}/instructors/all">All teachers</a></b>
 			</div>
 			<br/>
 			
@@ -104,17 +112,18 @@ pageEncoding="UTF-8"%>
 					<c:url var="linkToProfile" value="/instructors">
 						<c:param name="instructorId" value="${review.course.instructor.id}"/>
 					</c:url>
-					<div id ="review">
+					<div class ="review">
 						<p>About <a href="${linkToProfile}">
 						${review.course.instructor.firstName} ${review.course.instructor.lastName}</a>
 						</p>
-						<p>${review.text} ${review.createdAt} by ${review.student.firstName} ${review.student.lastName}</p>
+						<p>${review.text}</p>
+						<p>${review.createdAt} by student ${review.student.firstName} ${review.student.lastName}</p>
 					</div>
 				</c:forEach>
 			</div>
 			
 			<div>
-				<a href="${pageContext.request.contextPath}/subjects/all">All subjects</a>
+				
 			</div>
 		</div>
 	</div>

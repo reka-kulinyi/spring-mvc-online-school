@@ -32,6 +32,18 @@
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav navbar-right">
 					<li>
+						<!-- link to my profile -->
+						<security:authorize access="isAuthenticated()">
+							<c:url var="myProfileLink" value="/instructors">
+								<c:param name="instructorId" value="${currentUser.id}"/>				
+							</c:url>
+							<a href="${myProfileLink}">My Profile</a>
+						</security:authorize>
+					</li>
+					<li style="margin: 1em 1em; ">
+						<a href="${pageContext.request.contextPath}/subjects/all">All subjects</a>
+					</li>
+					<li>
 						<!-- Add login/logout button -->
 						<security:authorize access="isAuthenticated()">
 							<form:form action="${pageContext.request.contextPath}/logout" method="POST">
@@ -43,15 +55,6 @@
 							<form:form action="${pageContext.request.contextPath}/loginPage" method="GET">
 								<input type="submit" class="btn btn-outline-secondary" value="Login"/>
 							</form:form>
-						</security:authorize>
-					</li>
-					<li>
-						<!-- link to my profile -->
-						<security:authorize access="isAuthenticated()">
-							<c:url var="myProfileLink" value="/instructors">
-								<c:param name="instructorId" value="${currentUser.id}"/>				
-							</c:url>
-							<a href="${myProfileLink}">My Profile</a>
 						</security:authorize>
 					</li>
 					</ul>
