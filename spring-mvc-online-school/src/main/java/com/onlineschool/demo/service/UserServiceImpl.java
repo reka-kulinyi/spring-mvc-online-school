@@ -22,6 +22,7 @@ import com.onlineschool.demo.dao.RoleDao;
 import com.onlineschool.demo.dao.UserDao;
 import com.onlineschool.demo.entity.User;
 import com.onlineschool.demo.user.SchoolUser;
+import com.onlineschool.demo.user.SchoolUserForUpdate;
 import com.onlineschool.demo.entity.Role;
 
 @Service
@@ -112,5 +113,16 @@ public class UserServiceImpl implements UserService {
 		defaultRole.add(roleDao.getRoleByName("ROLE_TEACHER"));
 		user.setRoles(defaultRole);
 		userDao.save(user);
+	}
+	
+	@Override
+	@Transactional
+	public void save(@Valid SchoolUserForUpdate userForUpdate, User userToUpdate) {
+		userToUpdate.setUsername(userForUpdate.getUsername());
+		userToUpdate.setFirstName(userForUpdate.getFirstName());
+		userToUpdate.setLastName(userForUpdate.getLastName());
+		userToUpdate.setEmail(userForUpdate.getEmail());
+		userToUpdate.setIntroduction(userForUpdate.getIntroduction());
+		userDao.save(userToUpdate);
 	}
 }

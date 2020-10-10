@@ -2,12 +2,17 @@ package com.onlineschool.demo.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.onlineschool.demo.entity.Course;
@@ -19,6 +24,7 @@ import com.onlineschool.demo.service.ReviewService;
 import com.onlineschool.demo.service.SubjectService;
 import com.onlineschool.demo.service.UserService;
 import com.onlineschool.demo.user.SchoolUserForUpdate;
+import java.util.logging.Logger;
 
 @Controller
 public class DemoController {
@@ -34,6 +40,8 @@ public class DemoController {
 	
 	@Autowired
 	private ReviewService reviewService;
+	
+	private Logger logger = Logger.getLogger(getClass().getName());
 	
 	@GetMapping("/")
 	public String home(Model model) {
@@ -122,5 +130,27 @@ public class DemoController {
 		userForUpdate.setIntroduction(user.getIntroduction());
 		model.addAttribute("schoolUserForUpdate", userForUpdate);
 		return "user-update-form";
+	}
+	
+	@PostMapping("/users/update/{id}")
+	public String processUserUpdate(@Valid @ModelAttribute("schoolUserForUpdate")
+			SchoolUserForUpdate userForUpdate, BindingResult bindingResult, Model model) {
+		
+		User userToUpdate = userService.getUserById(userForUpdate.getId());
+		String originalUsername = userToUpdate.getUsername();
+		String username = userForUpdate.getUsername();
+		logger.info("Processing update form for " + originalUsername);
+		
+		if(bindingResult.hasErrors()) {
+			return "instructor-update-form";
+		}
+		
+		userService.save(userForUpdate, userToUpdate);
+		logger.info("Successfully updated user: " + username);
+		
+		if(!username.equals(originalUsername)) {
+			return "re-login";
+		}
+		return "update-confirmation";
 	}
 }

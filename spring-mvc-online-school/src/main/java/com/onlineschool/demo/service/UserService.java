@@ -1,10 +1,13 @@
 package com.onlineschool.demo.service;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import com.onlineschool.demo.entity.User;
 import com.onlineschool.demo.user.SchoolUser;
+import com.onlineschool.demo.user.SchoolUserForUpdate;
 
 public interface UserService extends UserDetailsService{
 
@@ -16,4 +19,5 @@ public interface UserService extends UserDetailsService{
 	User findByUsername(String username);
 	void save(SchoolUser schooluser);
 	User getUserById(long userId);
+	void save(@Valid SchoolUserForUpdate userForUpdate, User userToUpdate);
 }
