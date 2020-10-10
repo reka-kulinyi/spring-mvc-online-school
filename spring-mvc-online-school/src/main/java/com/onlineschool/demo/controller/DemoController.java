@@ -18,6 +18,7 @@ import com.onlineschool.demo.service.CourseService;
 import com.onlineschool.demo.service.ReviewService;
 import com.onlineschool.demo.service.SubjectService;
 import com.onlineschool.demo.service.UserService;
+import com.onlineschool.demo.user.SchoolUserForUpdate;
 
 @Controller
 public class DemoController {
