@@ -91,7 +91,7 @@ pageEncoding="UTF-8"%>
 								<!-- delete link -->
 								<security:authorize access="isAuthenticated()">
 									<c:if test="${currentUser.id == instructor.id}">
-										<c:url var="deleteLink" value="/course/delete">
+										<c:url var="deleteLink" value="/courses/delete">
 											<c:param name="courseId" value="${course.id}"/>
 											<c:param name="instructorId" value="${instructor.id}"/>
 										</c:url>
