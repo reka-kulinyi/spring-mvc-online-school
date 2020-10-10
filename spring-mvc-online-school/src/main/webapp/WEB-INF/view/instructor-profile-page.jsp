@@ -39,6 +39,18 @@ pageEncoding="UTF-8"%>
 					<div style="margin-bottom: 2em">
 						<h2>${instructor.firstName} ${instructor.lastName}</h2>
 					</div>
+					
+					<!-- Update profile link -->
+					<security:authorize access="isAuthenticated()">
+						<div>
+							<c:if test="${currentUser.id == instructor.id}">
+								<c:url var="updateProfileLink" value="/instructors/updateForm">
+									<c:param name="userId" value="${instructor.id}"/>
+								</c:url>
+								<a href="${updateProfileLink}">Update profile</a>
+							</c:if>
+						</div>
+					</security:authorize>
 					<div style="margin-bottom: 1.5em">
 						<h4>Contact</h4>
 						<p>${instructor.email}</p>

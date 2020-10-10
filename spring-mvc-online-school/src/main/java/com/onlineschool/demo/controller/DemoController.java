@@ -105,4 +105,21 @@ public class DemoController {
 		model.addAttribute("instructors", instructorsBySubject);
 		return "instructor-list";
 	}
+	
+	@GetMapping("/instructors/updateForm")
+	public String showUpdateForm(@RequestParam("userId") long userId, Model model) {
+		
+		User user = userService.getUserById(userId);
+		
+		// creating DTO
+		SchoolUserForUpdate userForUpdate = new SchoolUserForUpdate();
+		userForUpdate.setId(userId);
+		userForUpdate.setEmail(user.getEmail());
+		userForUpdate.setFirstName(user.getFirstName());
+		userForUpdate.setLastName(user.getLastName());
+		userForUpdate.setUsername(user.getUsername());
+		userForUpdate.setIntroduction(user.getIntroduction());
+		model.addAttribute("schoolUserForUpdate", userForUpdate);
+		return "instructor-update-form";
+	}
 }
