@@ -27,7 +27,7 @@
 		<nav class="navbar navbar-default">
 	  		<div class="container-fluid">
 		  		<div class="navbar-header">
-		  			<h2>Online School Home Page</h2>
+		  			<h2><a style="color: inherit; text-decoration: none" href="${pageContext.request.contextPath}/">Online School Home Page</a></h2>
 		  		</div>
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav navbar-right">

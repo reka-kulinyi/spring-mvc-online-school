@@ -19,6 +19,9 @@ pageEncoding="UTF-8"%>
 	
 	<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
+	<style>
+		#content{margin-top: 2em;}
+	</style>
 	<title>All subjects</title>
 </head>
 
@@ -26,7 +29,7 @@ pageEncoding="UTF-8"%>
 
 	<div id="container">
 		<%@ include file="navbar.jsp" %>
-		<div id="content">
+		<div id="content" class="col-sm-10 offset-sm-1">
 			<h2>All subjects</h2>
 			<div id="subjects">
 				

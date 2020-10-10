@@ -20,28 +20,43 @@ pageEncoding="UTF-8"%>
 		
 		<script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 		<link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/style.css"/>
+		<style>
+			#content{margin-top: 2em;}
+			.review{margin-top: 1.5em; 
+			  background-color:rgb(246, 246, 246); 
+			  padding: 5px;
+			  border-radius: 4px;}
+			.review p{ margin: 4px 5px;}
+		</style>
 		<title>Instructor profile</title>
 	</head>
 	
 	<body>
 		<div id="container">
 			<%@ include file="navbar.jsp" %>
-			<div id="content">
+			<div id="content" class="col-sm-10 offset-sm-1">
 				<div>
-					<h2>${instructor.firstName} ${instructor.lastName}</h2>
-					<p>${instructor.email}</p>
-					<p>Introduction</p>
-					<c:choose>
-						<c:when test="${instructor.introduction != null}">
-							<p>${instructor.introduction}</p>
-						</c:when>
-						<c:otherwise>
-							No introduction
-						</c:otherwise>
-					</c:choose>
+					<div style="margin-bottom: 2em">
+						<h2>${instructor.firstName} ${instructor.lastName}</h2>
+					</div>
+					<div style="margin-bottom: 1.5em">
+						<h4>Contact</h4>
+						<p>${instructor.email}</p>
+					</div>
+					<div style="margin-bottom: 1.5em">
+						<h4>Introduction</h4>
+						<c:choose>
+							<c:when test="${instructor.introduction != null}">
+								<p>${instructor.introduction}</p>
+							</c:when>
+							<c:otherwise>
+								No introduction
+							</c:otherwise>
+						</c:choose>
+					</div>
 				</div>
-				<br/>
-				<div>
+			
+				<div style="margin-bottom: 1.5em">
 					<h4>Courses:</h4>
 					<c:choose>
 						<c:when test="${fn:length(instructor.courses) gt 0}">
@@ -71,19 +86,20 @@ pageEncoding="UTF-8"%>
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<br/>
+				
 				<div>
 					<h4>Reviews:</h4>
 					<c:choose>
 						<c:when test="${fn:length(reviews) gt 0}">
 							<c:forEach var="review" items="${reviews}">
-								<p>${review.text}</p>
-								<p>
-									by ${review.student.firstName} ${review.student.lastName}
-									about ${instructor.firstName} ${instructor.lastName}'s 
-									${review.course.subject.name} course
-								</p>
-								<br/>
+								<div class="review">
+									<p>${review.text}</p>
+									<p>
+										by ${review.student.firstName} ${review.student.lastName}
+										about ${instructor.firstName} ${instructor.lastName}'s 
+										${review.course.subject.name} course
+									</p>
+								</div>
 							</c:forEach>
 						</c:when>
 						<c:otherwise>
@@ -91,8 +107,8 @@ pageEncoding="UTF-8"%>
 						</c:otherwise>
 					</c:choose>
 				</div>
-				<div>
-					<a href="${pageContext.request.contextPath}/">Back to main page</a>
+				<div style="margin-top: 1em">
+					<b><a href="${pageContext.request.contextPath}/">Back to main page</a></b>
 				</div>
 			</div>
 		</div>
