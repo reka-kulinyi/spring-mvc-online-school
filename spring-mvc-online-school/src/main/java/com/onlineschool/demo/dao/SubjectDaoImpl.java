@@ -23,7 +23,7 @@ public class SubjectDaoImpl implements SubjectDao {
 		}
 		Session currentSession = sessionFactory.getCurrentSession();
 		Query<Subject> query = currentSession.createQuery("from Subject "
-				+ "where name:=subjectName", Subject.class);
+				+ "where name=:subjectName", Subject.class);
 		query.setParameter("subjectName", subjectName);
 		Subject subject = null;
 		

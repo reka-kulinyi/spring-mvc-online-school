@@ -50,7 +50,12 @@ public class CourseDaoImpl implements CourseDao {
 			ex.printStackTrace();
 		}
 	}
-	
-	
 
+	@Override
+	public void save(Course course) {
+		Session currentSession = sessionFactory.getCurrentSession();
+		currentSession.saveOrUpdate(course);
+		
+	}
+	
 }

@@ -47,7 +47,7 @@ pageEncoding="UTF-8"%>
 				<div class="col-sm-4">
 					<label for="selectSubject">Choose subject</label>
 				
-					<select name="searchSubject" id="selectSubject" class="form-control">
+					<select name="searchSubject" id="selectSubject" >
 						<c:forEach var="subject" items="${subjects}">
 							<option value="${subject.name}">${subject.name}</option>					
 						</c:forEach>

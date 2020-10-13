@@ -9,4 +9,8 @@ public interface CourseDao {
 	List<Course> getCoursesByInstructor(User instructor);
 
 	void deleteCourseById(long courseId);
+
+	void save(Course course);
+
+	
 }
