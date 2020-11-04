@@ -18,6 +18,10 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import javax.persistence.JoinColumn;
 
 @Entity
@@ -41,6 +45,7 @@ public class User {
 	@Column(name="email")
 	private String email;
 	
+	@JsonIgnore
 	@Column(name="password")
 	private String password;
 	
@@ -53,12 +58,14 @@ public class User {
     @Column(name="introduction")
     private String introduction;
     
+    @JsonIgnore
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name="users_roles",
 	joinColumns=@JoinColumn(name="user_id"),
 	inverseJoinColumns=@JoinColumn(name="role_id"))
 	private Set<Role> roles;
 	
+    
 	@OneToMany(mappedBy="instructor", fetch = FetchType.EAGER,
 	cascade= {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
 	private List<Course> courses;
@@ -198,6 +205,7 @@ public class User {
 		this.roles = roles;
 	}
 	
+	@JsonManagedReference
 	public List<Course> getCourses() {
 		return courses;
 	}

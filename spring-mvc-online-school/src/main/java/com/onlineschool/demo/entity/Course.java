@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name="course")
 public class Course {
@@ -61,6 +63,7 @@ public class Course {
 		this.price = price;
 	}
 
+	@JsonBackReference // otherwise infinite loop when requesting instructor from api
 	public User getInstructor() {
 		return instructor;
 	}
