@@ -17,8 +17,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.BDDMockito.given;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
@@ -189,5 +193,46 @@ class DemoControllerTest {
                 .andExpect(model().attributeExists("reviews"))
                 .andExpect(view().name("/instructor-profile-page"));
 
+    }
+
+    // - - - tests for searchInstructorsBySubjectAndPrice - - -
+    @Test
+    void testSearchInstructorsBySubjectAndPrice() {
+
+        // when
+        String viewName = demoController.searchInstructorsBySubjectAndPrice(anyString(), anyDouble(), testModel);
+
+        // then
+        then(userService).should().getInstructorsBySubjectAndPrice(anyString(), anyDouble());
+        then(testModel).should().addAttribute("instructors", anyList());
+        assertThat(viewName).isEqualToIgnoringCase("instructor-list");
+    }
+
+
+    @Test
+    void testSearchInstructorsBySubjectAndPriceWithMvcTest() throws Exception {
+            mockMvc.perform(get("/search"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("instructors"))
+                .andExpect(view().name("/instructor-list"));
+    }
+
+    @Test
+    void testSearchInstructorsBySubjectAndPriceWithTeacherList() {
+        // given
+        User teacher1 = new User();
+        User teacher2 = new User();
+        List<User> instructors = new ArrayList<>();
+        instructors.add(teacher1);
+        instructors.add(teacher2);
+        given(userService.getInstructorsBySubjectAndPrice(anyString(), anyDouble())).willReturn(instructors);
+
+        // when
+        demoController.searchInstructorsBySubjectAndPrice(anyString(), anyDouble(), testModel);
+
+        // then
+        then(courseService).should(times(2)).getCoursesByInstructor(any(User.class));
+        then(teacher1).should().setCourses(anyList());
+        then(teacher2).should().setCourses(anyList());
     }
 }
