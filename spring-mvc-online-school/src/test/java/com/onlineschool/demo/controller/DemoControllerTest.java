@@ -235,4 +235,24 @@ class DemoControllerTest {
         then(teacher1).should().setCourses(anyList());
         then(teacher2).should().setCourses(anyList());
     }
+
+    // - - - tests for showAllInstructors method - - -
+    @Test
+    void testShowAllInstructors() {
+        // when
+        String viewName = demoController.showAllInstructors(testModel);
+
+        // then
+        then(userService).should().getAllInstructors();
+        then(testModel).should().addAttribute("instructors", anyList());
+        assertThat(viewName).isEqualToIgnoringCase("instructors");
+    }
+
+    @Test
+    void testShowAllInstructorsWithMvcTest() throws Exception {
+        mockMvc.perform(get("/instructors/all"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("instructors"))
+                .andExpect(view().name("/instructors"));
+    }
 }
