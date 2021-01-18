@@ -1,5 +1,6 @@
 package com.onlineschool.demo.controller;
 
+import com.onlineschool.demo.entity.User;
 import com.onlineschool.demo.service.CourseService;
 import com.onlineschool.demo.service.ReviewService;
 import com.onlineschool.demo.service.SubjectService;
@@ -17,15 +18,12 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.model;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.view;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
 class DemoControllerTest {
@@ -90,7 +88,7 @@ class DemoControllerTest {
 
         // then
         then(userService).should(never()).findByUsername(anyString());
-        then(testModel).should(times(3)).addAttribute(anyString(), any());
+        then(testModel).should(times(3)).addAttribute(anyString(), anyList());
     }
 
     @Test
@@ -101,7 +99,8 @@ class DemoControllerTest {
 
         // then
         then(userService).should(times(1)).findByUsername(anyString());
-        then(testModel).should(times(4)).addAttribute(anyString(), any());
+        then(testModel).should(times(3)).addAttribute(anyString(), anyList());
+        then(testModel).should(times(1)).addAttribute("currentUser", any(User.class));
     }
 
     @Test
@@ -121,7 +120,6 @@ class DemoControllerTest {
     @Test
     void testHomeWithMvcTestAuthenticationNotNull() throws Exception {
 
-
         mockMvc.perform(get("/"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("recentReviews"))
@@ -131,4 +129,65 @@ class DemoControllerTest {
                 .andExpect(view().name("/"));
     }
 
+    // - - - tests for showInstructorProfile method - - -
+    @Test
+    void testShowInstructorProfile() {
+        // when
+        String viewName = demoController.showInstructorProfile(1l, testModel);
+
+        // then
+        assertThat(viewName).isEqualToIgnoringCase("instructor-profile-page");
+    }
+
+
+    @Test
+    void testShowInstructorProfileWithAuthNotNull() {
+        // when
+        demoController.home(testModel);
+
+        // then
+        then(userService).should().findByUsername(anyString());
+        then(testModel).should().addAttribute("currentUser", any(User.class));
+        then(testModel).should().addAttribute("instructor", any(User.class));
+        then(testModel).should().addAttribute("reviews", anyList());
+    }
+
+    @Test
+    void testShowInstructorProfileWithAuthNull() {
+        // when
+        authentication = null;
+        demoController.home(testModel);
+
+        // then
+        then(userService).should(never()).findByUsername(anyString());
+        then(testModel).should(never()).addAttribute("currentUser", any(User.class));
+        then(testModel).should().addAttribute("instructor", any(User.class));
+        then(testModel).should().addAttribute("reviews", anyList());
+    }
+
+    @Test
+    void testShowInstructorProfileWithMvcTestAuthenticationNotNull() throws Exception {
+
+        mockMvc.perform(get("/instructors"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("currentUser"))
+                .andExpect(model().attributeExists("instructor"))
+                .andExpect(model().attributeExists("reviews"))
+                .andExpect(view().name("/instructor-profile-page"));
+    }
+
+    @Test
+    void testShowInstructorProfileWithMvcTestAuthenticationNull() throws Exception {
+
+        // given
+        authentication = null;
+
+        mockMvc.perform(get("/instructors"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeDoesNotExist("currentUser"))
+                .andExpect(model().attributeExists("instructor"))
+                .andExpect(model().attributeExists("reviews"))
+                .andExpect(view().name("/instructor-profile-page"));
+
+    }
 }
