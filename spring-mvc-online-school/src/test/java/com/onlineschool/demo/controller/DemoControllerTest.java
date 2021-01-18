@@ -5,6 +5,7 @@ import com.onlineschool.demo.service.CourseService;
 import com.onlineschool.demo.service.ReviewService;
 import com.onlineschool.demo.service.SubjectService;
 import com.onlineschool.demo.service.UserService;
+import com.onlineschool.demo.user.SchoolUserForUpdate;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -275,4 +276,76 @@ class DemoControllerTest {
                 .andExpect(model().attributeExists("subjects"))
                 .andExpect(view().name("subjects"));
     }
+
+    // - - - tests for showInstructorsBySubject method - - -
+    @Test
+    void testShowInstructorsBySubject() {
+
+        // when
+        String viewName = demoController.showInstructorsBySubject(anyString(), testModel);
+
+        // then
+        then(userService).should().getInstructorsBySubject(anyString());
+        then(testModel).should().addAttribute("instructors");
+        assertThat(viewName).isEqualToIgnoringCase("instructor-list");
+    }
+
+    @Test
+    void testShowInstructorsBySubjectWithMvcTest() throws Exception {
+        mockMvc.perform(get("/instructors/subjects"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("instructors"))
+                .andExpect(view().name("instructor-list"));
+    }
+
+    // - - - tests for showUpdateForm method - - -
+    @Test
+    void testShowUpdateForm() {
+        // given
+        SchoolUserForUpdate userForUpdate = new SchoolUserForUpdate();
+
+        // when
+        String viewName = demoController.showUpdateForm(1l, testModel);
+
+        // then
+        then(userService).should().getUserById(1l);
+        then(userForUpdate).should().setId(1l);
+        then(userForUpdate).should().setEmail(anyString());
+        then(userForUpdate).should().setFirstName(anyString());
+        then(userForUpdate).should().setLastName(anyString());
+        then(userForUpdate).should().setUsername(anyString());
+        then(userForUpdate).should().setIntroduction(anyString());
+        then(testModel).should().addAttribute("schoolUserForUpdate", userForUpdate);
+        assertThat(viewName).isEqualToIgnoringCase("user-update-form");
+    }
+
+    @Test
+    void testShowUpdateFormUserMethods() {
+        // given
+        User user = new User();
+        given(userService.getUserById(anyLong())).willReturn(user);
+
+        // when
+        String viewName = demoController.showUpdateForm(1l, testModel);
+
+        // then
+        then(user).should().getEmail();
+        then(user).should().getFirstName();
+        then(user).should().getLastName();
+        then(user).should().getUsername();
+        then(user).should().getIntroduction();
+        then(user).shouldHaveNoMoreInteractions();
+        assertThat(viewName).isEqualToIgnoringCase("user-update-form");
+    }
+
+    @Test
+    void testShowUpdateFormWithMvcTest() throws Exception {
+        mockMvc.perform(get("/instructors/updateForm"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("schoolUserForUpdate"))
+                .andExpect(view().name("user-update-form"));
+    }
+
+    // - - - tests for processUserUpdate method - - -
+    
 }
