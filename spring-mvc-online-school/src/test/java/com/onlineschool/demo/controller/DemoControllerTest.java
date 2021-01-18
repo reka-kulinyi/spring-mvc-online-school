@@ -178,7 +178,8 @@ class DemoControllerTest {
     @Test
     void testShowInstructorProfileWithMvcTestAuthenticationNotNull() throws Exception {
 
-        mockMvc.perform(get("/instructors"))
+        mockMvc.perform(get("/instructors")
+                    .requestAttr("instructorId", 1L))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("currentUser"))
                 .andExpect(model().attributeExists("instructor"))
@@ -192,7 +193,8 @@ class DemoControllerTest {
         // given
         authentication = null;
 
-        mockMvc.perform(get("/instructors"))
+        mockMvc.perform(get("/instructors")
+                .requestAttr("instructorId", 1L))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeDoesNotExist("currentUser"))
                 .andExpect(model().attributeExists("instructor"))
@@ -217,7 +219,9 @@ class DemoControllerTest {
 
     @Test
     void testSearchInstructorsBySubjectAndPriceWithMvcTest() throws Exception {
-            mockMvc.perform(get("/search"))
+            mockMvc.perform(get("/search")
+                    .requestAttr("searchSubject", anyString())
+                    .requestAttr("maxPrice", anyDouble()))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("instructors"))
                 .andExpect(view().name("instructor-list"));
@@ -297,7 +301,8 @@ class DemoControllerTest {
 
     @Test
     void testShowInstructorsBySubjectWithMvcTest() throws Exception {
-        mockMvc.perform(get("/instructors/subjects"))
+        mockMvc.perform(get("/instructors/subjects")
+                    .requestAttr("subjectName", anyString()))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("instructors"))
                 .andExpect(view().name("instructor-list"));
@@ -345,7 +350,8 @@ class DemoControllerTest {
 
     @Test
     void testShowUpdateFormWithMvcTest() throws Exception {
-        mockMvc.perform(get("/instructors/updateForm"))
+        mockMvc.perform(get("/instructors/updateForm")
+                    .requestAttr("userId", anyLong()))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("schoolUserForUpdate"))
                 .andExpect(view().name("user-update-form"));
