@@ -17,6 +17,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +29,7 @@ import static org.mockito.BDDMockito.then;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.times;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -44,6 +46,9 @@ class DemoControllerTest {
 
     @Mock
     private ReviewService reviewService;
+
+    @Mock
+    private BindingResult bindingResult;
 
     @Mock
     private Model testModel;
@@ -347,5 +352,69 @@ class DemoControllerTest {
     }
 
     // - - - tests for processUserUpdate method - - -
-    
+    @Test
+    void testProcessUserUpdateNoBindingResultErrorWithSameUsername() {
+        // given
+        SchoolUserForUpdate schoolUserForUpdate = new SchoolUserForUpdate();
+        schoolUserForUpdate.setUsername("user");
+        User userToUpdate = new User();
+        userToUpdate.setUsername("user");
+        given(bindingResult.hasErrors()).willReturn(false);
+
+        // when
+        String viewName = demoController.processUserUpdate(schoolUserForUpdate, bindingResult, testModel);
+
+        // then
+        then(userService).should().getUserById(anyLong());
+        then(userToUpdate).should().getUsername();
+        then(schoolUserForUpdate).should().getUsername();
+        then(userService).should().save(schoolUserForUpdate, userToUpdate);
+        assertThat(viewName).isEqualToIgnoringCase("update-confirmation");
+    }
+
+    @Test
+    void testProcessUserUpdateNoBindingResultErrorWithDifferentUsername() {
+        // given
+        SchoolUserForUpdate schoolUserForUpdate = new SchoolUserForUpdate();
+        schoolUserForUpdate.setUsername("user1");
+        User userToUpdate = new User();
+        userToUpdate.setUsername("user2");
+        given(bindingResult.hasErrors()).willReturn(false);
+
+        // when
+        String viewName = demoController.processUserUpdate(schoolUserForUpdate, bindingResult, testModel);
+
+        // then
+        then(userService).should().getUserById(anyLong());
+        then(userToUpdate).should().getUsername();
+        then(schoolUserForUpdate).should().getUsername();
+        then(userService).should().save(schoolUserForUpdate, userToUpdate);
+        assertThat(viewName).isEqualToIgnoringCase("re-login");
+    }
+
+    @Test
+    void testProcessUserUpdateWithBindingResultError() {
+        // given
+        SchoolUserForUpdate schoolUserForUpdate = new SchoolUserForUpdate();
+        User userToUpdate = new User();
+        given(bindingResult.hasErrors()).willReturn(true);
+
+        // when
+        String viewName = demoController.processUserUpdate(schoolUserForUpdate, bindingResult, testModel);
+
+        // then
+        then(userService).should().getUserById(anyLong());
+        then(userToUpdate).should().getUsername();
+        then(schoolUserForUpdate).should().getUsername();
+        then(userService).should(never()).save(schoolUserForUpdate, userToUpdate);
+        assertThat(viewName).isEqualToIgnoringCase("user-update-form");
+    }
+
+    @Test
+    void testProcessUserUpdateWithMvcTest() throws Exception {
+        mockMvc.perform(post("/users/update/{id}", 1))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("schoolUserForUpdate"))
+                .andExpect(view().name("user-update-form"));
+    }
 }
