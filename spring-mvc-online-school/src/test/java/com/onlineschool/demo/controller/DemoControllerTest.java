@@ -177,7 +177,7 @@ class DemoControllerTest {
                 .andExpect(model().attributeExists("currentUser"))
                 .andExpect(model().attributeExists("instructor"))
                 .andExpect(model().attributeExists("reviews"))
-                .andExpect(view().name("/instructor-profile-page"));
+                .andExpect(view().name("instructor-profile-page"));
     }
 
     @Test
@@ -191,7 +191,7 @@ class DemoControllerTest {
                 .andExpect(model().attributeDoesNotExist("currentUser"))
                 .andExpect(model().attributeExists("instructor"))
                 .andExpect(model().attributeExists("reviews"))
-                .andExpect(view().name("/instructor-profile-page"));
+                .andExpect(view().name("instructor-profile-page"));
 
     }
 
@@ -214,7 +214,7 @@ class DemoControllerTest {
             mockMvc.perform(get("/search"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("instructors"))
-                .andExpect(view().name("/instructor-list"));
+                .andExpect(view().name("instructor-list"));
     }
 
     @Test
@@ -253,6 +253,26 @@ class DemoControllerTest {
         mockMvc.perform(get("/instructors/all"))
                 .andExpect(status().isOk())
                 .andExpect(model().attributeExists("instructors"))
-                .andExpect(view().name("/instructors"));
+                .andExpect(view().name("instructors"));
+    }
+
+    // - - - tests for showAllSubjects method - - -
+    @Test
+    void testShowAllSubjects() {
+        // when
+        String viewName = demoController.showAllSubjects(testModel);
+
+        // then
+        then(subjectService).should().getAllSubjects();
+        then(testModel).should().addAttribute("subjects", anyList());
+        assertThat(viewName).isEqualToIgnoringCase("subjects");
+    }
+
+    @Test
+    void testShowAllSubjectsWithMvcTest() throws Exception {
+        mockMvc.perform(get("/subjects/all"))
+                .andExpect(status().isOk())
+                .andExpect(model().attributeExists("subjects"))
+                .andExpect(view().name("subjects"));
     }
 }
