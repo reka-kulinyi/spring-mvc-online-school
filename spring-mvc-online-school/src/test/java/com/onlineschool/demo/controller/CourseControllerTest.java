@@ -56,7 +56,8 @@ class CourseControllerTest {
     @Test
     void testControllerShowNewCourseForm() throws Exception {
 
-        mockMvc.perform(get("/courses/addNewCourse"))
+        mockMvc.perform(get("/courses/addNewCourse")
+                .requestAttr("userId", anyLong()))
         .andExpect(status().isOk())
         .andExpect(model().attributeExists("courseInstructor"))
         .andExpect(model().attributeExists("subjects"))
