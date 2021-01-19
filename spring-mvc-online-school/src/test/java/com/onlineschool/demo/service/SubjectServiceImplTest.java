@@ -1,7 +1,6 @@
 package com.onlineschool.demo.service;
 
 import com.onlineschool.demo.dao.SubjectDao;
-import com.onlineschool.demo.entity.Course;
 import com.onlineschool.demo.entity.Subject;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,7 +34,7 @@ class SubjectServiceImplTest {
         when(subjectDao.getAllSubjects()).thenReturn(subjects);
 
         // when
-        List<Subject> returnedSubjects = subjectService.getAllSubjects()
+        List<Subject> returnedSubjects = subjectService.getAllSubjects();
 
         // then
         then(subjectDao).should().getAllSubjects();
