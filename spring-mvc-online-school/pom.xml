@@ -8,7 +8,7 @@ xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/x
   <packaging>war</packaging>
   
   <properties>
-		<springframework.version>5.2.5.RELEASE</springframework.version>
+		<springframework.version>5.2.20.RELEASE</springframework.version>
 		<springsecurity.version>5.3.1.RELEASE</springsecurity.version>
 		<hibernate.version>5.4.14.Final</hibernate.version>
 		<mysql.connector.version>8.0.19</mysql.connector.version>
